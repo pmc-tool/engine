@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(cat:*)",
+      "Bash(tr:*)",
+      "Bash(fold:*)",
+      "Bash(node -c:*)",
+      "Bash(xxd:*)",
+      "Bash(npm run dev:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
