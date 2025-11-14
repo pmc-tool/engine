@@ -570,7 +570,7 @@ export default function WizardReviewPage() {
         </main>
 
         {/* Bottom Navigation Bar */}
-        <div className="fixed bottom-0 left-0 md:left-64 right-0 bg-white border-t border-stone-200 px-4 md:px-8 py-3 md:py-4 z-30">
+        <div className="fixed bottom-0 left-0 md:left-64 right-0 bg-white border-t border-stone-200 px-4 md:px-8 py-3 md:py-4 z-30 shadow-lg">
           <div className="flex items-center justify-between max-w-7xl mx-auto gap-2">
             <Link
               href="/wizard/customization"
@@ -591,7 +591,7 @@ export default function WizardReviewPage() {
               </Link>
               <button
                 onClick={handleLaunch}
-                className="flex items-center px-4 md:px-8 py-2 md:py-3 bg-pmc-red hover:bg-pmc-red-dark text-white font-bold rounded-2xl shadow-lg transition text-sm md:text-base whitespace-nowrap"
+                className="flex items-center px-4 md:px-8 py-2.5 md:py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm md:text-base whitespace-nowrap"
               >
                 <FontAwesomeIcon icon={faRocket} className="mr-1 md:mr-2 text-sm" />
                 <span className="hidden sm:inline">Launch Site</span>

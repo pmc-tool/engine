@@ -61,9 +61,9 @@ export default function WizardThemePage() {
           <WizardStepper currentStep={1} steps={wizardSteps} />
         </TopHeader>
 
-        <main className="flex-1 overflow-y-auto bg-stone-50 pb-32">
+        <main className="flex-1 overflow-y-auto bg-stone-50 pb-20 md:pb-24">
           {/* Main Content */}
-          <section className="px-4 md:px-8 py-6 md:py-8">
+          <section className="px-4 md:px-8 py-4 md:py-6">
             <div className="max-w-7xl mx-auto">
 
               {/* Step Header */}
@@ -363,7 +363,7 @@ export default function WizardThemePage() {
         </main>
 
         {/* Sticky Footer with Action Buttons */}
-        <div className="fixed bottom-0 left-0 md:left-64 right-0 bg-white border-t border-stone-200 px-4 md:px-8 py-3 md:py-4 z-30">
+        <div className="fixed bottom-0 left-0 md:left-64 right-0 bg-white border-t border-stone-200 px-4 md:px-8 py-3 md:py-4 z-30 shadow-lg">
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 md:gap-4">
             <button
               className="px-3 md:px-6 py-2 md:py-3 text-stone-400 cursor-not-allowed font-medium transition flex items-center text-sm md:text-base"
@@ -382,7 +382,7 @@ export default function WizardThemePage() {
               </Link>
               <Link
                 href="/wizard/hosting"
-                className="px-4 md:px-8 py-2 md:py-3 bg-pmc-red hover:bg-pmc-red-dark text-white font-semibold rounded-card shadow-saas transition flex items-center text-sm md:text-base whitespace-nowrap"
+                className="px-4 md:px-8 py-2.5 md:py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center text-sm md:text-base whitespace-nowrap"
               >
                 <span className="hidden sm:inline">Next: Hosting & Domain</span>
                 <span className="sm:hidden">Next</span>

@@ -778,7 +778,7 @@ export default function WizardHostingPage() {
               </Link>
               <Link
                 href="/wizard/customization"
-                className="flex items-center px-4 md:px-6 py-2 md:py-3 bg-pmc-red hover:bg-pmc-red-dark text-white font-medium rounded-2xl shadow-sm transition text-sm md:text-base whitespace-nowrap"
+                className="flex items-center px-4 md:px-6 py-2.5 md:py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm md:text-base whitespace-nowrap"
               >
                 <span className="hidden sm:inline">Continue to Content Setup</span>
                 <span className="sm:hidden">Next</span>

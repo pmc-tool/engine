@@ -93,7 +93,7 @@ export default function WizardCustomizationPage() {
           <WizardStepper currentStep={3} steps={wizardSteps} />
         </TopHeader>
 
-        <main className="flex-1 overflow-y-auto bg-stone-50 pb-32">
+        <main className="flex-1 overflow-y-auto bg-stone-50 pb-20 md:pb-24">
 
           <div className="flex">
 
@@ -956,7 +956,7 @@ export default function WizardCustomizationPage() {
         </main>
 
         {/* Bottom Navigation Bar */}
-        <div className="fixed bottom-0 left-0 md:left-64 right-0 bg-white border-t border-stone-200 px-4 md:px-8 py-3 md:py-4 z-30">
+        <div className="fixed bottom-0 left-0 md:left-64 right-0 bg-white border-t border-stone-200 px-4 md:px-8 py-3 md:py-4 z-30 shadow-lg">
           <div className="flex items-center justify-between max-w-7xl mx-auto gap-2">
             <Link
               href="/wizard/hosting"
@@ -983,7 +983,7 @@ export default function WizardCustomizationPage() {
               </Link>
               <Link
                 href="/wizard/review"
-                className="flex items-center px-4 md:px-8 py-2 md:py-3 bg-pmc-red hover:bg-pmc-red-dark text-white font-bold rounded-2xl shadow-lg transition text-sm md:text-base whitespace-nowrap"
+                className="flex items-center px-4 md:px-8 py-2.5 md:py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all text-sm md:text-base whitespace-nowrap"
               >
                 <span className="hidden sm:inline">Continue to Review</span>
                 <span className="sm:hidden">Next</span>
