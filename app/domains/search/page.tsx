@@ -166,55 +166,56 @@ export default function DomainSearchPage() {
 
         <main className="flex-1 overflow-y-auto bg-gray-50">
           {/* Page Header */}
-          <div className="p-8">
+          <div className="p-4 md:p-8">
             <div className="flex items-center justify-between mb-2">
-              <h1 className="text-3xl font-bold text-gray-900">Search & Purchase Domains</h1>
+              <h1 className="text-xl md:text-3xl font-bold text-gray-900">Search & Purchase Domains</h1>
               <button
-                className="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors flex items-center gap-2"
+                className="px-3 md:px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors flex items-center gap-2"
               >
                 <FontAwesomeIcon icon={faShoppingCart} />
-                <span>Cart ({cartCount})</span>
+                <span className="hidden sm:inline">Cart ({cartCount})</span>
+                <span className="sm:hidden">({cartCount})</span>
               </button>
             </div>
-            <p className="text-gray-600">Find and register the perfect domain for your next project. All domains include free SSL, DNS management, and WHOIS privacy.</p>
+            <p className="text-sm md:text-base text-gray-600">Find and register the perfect domain for your next project. All domains include free SSL, DNS management, and WHOIS privacy.</p>
           </div>
 
           {/* Search Section */}
-          <div className="px-8 mb-8">
-            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-2xl border border-blue-200 p-8">
+          <div className="px-4 md:px-8 mb-8">
+            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-2xl border border-blue-200 p-4 md:p-8">
               <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-6">
-                  <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} className="text-white text-3xl" />
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <FontAwesomeIcon icon={faMagnifyingGlass} className="text-white text-2xl md:text-3xl" />
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Find Your Perfect Domain</h2>
-                  <p className="text-gray-600">Search millions of available domains across all popular TLDs</p>
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Find Your Perfect Domain</h2>
+                  <p className="text-sm md:text-base text-gray-600">Search millions of available domains across all popular TLDs</p>
                 </div>
 
-                <div className="bg-white rounded-xl shadow-lg p-6">
-                  <div className="flex gap-3 mb-4">
+                <div className="bg-white rounded-xl shadow-lg p-4 md:p-6">
+                  <div className="flex flex-col sm:flex-row gap-3 mb-4">
                     <div className="flex-1 relative">
                       <input
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                        placeholder="Enter your domain name (e.g., mybusiness)"
-                        className="w-full px-5 py-4 pr-12 border-2 border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-medium"
+                        placeholder="Enter your domain name"
+                        className="w-full px-4 md:px-5 py-3 md:py-4 pr-12 border-2 border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base md:text-lg font-medium"
                       />
                       <div className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
-                        <FontAwesomeIcon icon={faMagnifyingGlass} className="text-xl" />
+                        <FontAwesomeIcon icon={faMagnifyingGlass} className="text-lg md:text-xl" />
                       </div>
                     </div>
                     <button
                       onClick={handleSearch}
-                      className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl flex items-center gap-2 text-lg"
+                      className="px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 text-base md:text-lg"
                     >
                       <span>Search</span>
                       <FontAwesomeIcon icon={faArrowRight} />
                     </button>
                   </div>
-                  <div className="flex items-center gap-4 text-sm">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs md:text-sm">
                     <div className="flex items-center gap-2">
                       <FontAwesomeIcon icon={faCheck} className="text-green-600" />
                       <span className="text-gray-600">Instant availability check</span>
@@ -253,60 +254,62 @@ export default function DomainSearchPage() {
 
           {/* Search Results */}
           {showResults && (
-            <div className="px-8 mb-8">
-              <div className="flex items-center justify-between mb-6">
+            <div className="px-4 md:px-8 mb-8">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-1">Search Results</h2>
-                  <p className="text-sm text-gray-600">Showing results for "<span className="font-semibold">{searchQuery || 'mybusiness'}</span>"</p>
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">Search Results</h2>
+                  <p className="text-xs md:text-sm text-gray-600">Showing results for "<span className="font-semibold">{searchQuery || 'mybusiness'}</span>"</p>
                 </div>
-                <div className="flex items-center gap-3">
-                  <select className="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option>Sort by: Relevance</option>
-                    <option>Sort by: Price (Low to High)</option>
-                    <option>Sort by: Price (High to Low)</option>
-                    <option>Sort by: Popularity</option>
+                <div className="flex items-center gap-2 md:gap-3">
+                  <select className="flex-1 md:flex-none px-3 md:px-4 py-2 bg-white border border-gray-300 rounded-lg text-xs md:text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option>Sort: Relevance</option>
+                    <option>Price (Low-High)</option>
+                    <option>Price (High-Low)</option>
+                    <option>Popularity</option>
                   </select>
-                  <button className="px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center gap-2">
+                  <button className="px-3 md:px-4 py-2 bg-white border border-gray-300 rounded-lg text-xs md:text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors flex items-center gap-2">
                     <FontAwesomeIcon icon={faRotate} />
-                    Filters
+                    <span className="hidden sm:inline">Filters</span>
                   </button>
                 </div>
               </div>
 
               {/* Primary Result */}
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-green-300 p-6 mb-6 shadow-lg">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-green-600 rounded-xl flex items-center justify-center shadow-lg">
-                      <FontAwesomeIcon icon={faCheck} className="text-white text-2xl" />
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border-2 border-green-300 p-4 md:p-6 mb-6 shadow-lg">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                  <div className="flex items-start gap-3 md:gap-4">
+                    <div className="w-12 h-12 md:w-16 md:h-16 bg-green-600 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
+                      <FontAwesomeIcon icon={faCheck} className="text-white text-xl md:text-2xl" />
                     </div>
-                    <div>
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="text-3xl font-bold text-gray-900 font-mono">mybusiness.com</span>
-                        <span className="px-3 py-1 bg-green-600 text-white rounded-lg text-xs font-semibold uppercase tracking-wide">Available</span>
+                    <div className="flex-1">
+                      <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-2">
+                        <span className="text-lg md:text-3xl font-bold text-gray-900 font-mono break-all">mybusiness.com</span>
+                        <span className="px-2 md:px-3 py-1 bg-green-600 text-white rounded-lg text-xs font-semibold uppercase tracking-wide">Available</span>
                       </div>
-                      <div className="flex items-center gap-4 text-sm text-gray-600">
+                      <div className="flex flex-wrap items-center gap-2 md:gap-4 text-xs md:text-sm text-gray-600">
                         <div className="flex items-center gap-1.5">
                           <FontAwesomeIcon icon={faStar} className="text-amber-500" />
                           <span>Premium domain</span>
                         </div>
                         <div className="flex items-center gap-1.5">
                           <FontAwesomeIcon icon={faLock} className="text-green-600" />
-                          <span>Free WHOIS privacy</span>
+                          <span className="hidden sm:inline">Free WHOIS privacy</span>
+                          <span className="sm:hidden">Privacy</span>
                         </div>
                         <div className="flex items-center gap-1.5">
                           <FontAwesomeIcon icon={faShieldHalved} className="text-green-600" />
-                          <span>Free SSL certificate</span>
+                          <span className="hidden sm:inline">Free SSL certificate</span>
+                          <span className="sm:hidden">SSL</span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <div className="text-sm text-gray-600 mb-1">First year</div>
-                    <div className="text-4xl font-bold text-gray-900 mb-2">$12.99<span className="text-lg text-gray-600">/yr</span></div>
+                  <div className="text-left md:text-right">
+                    <div className="text-xs md:text-sm text-gray-600 mb-1">First year</div>
+                    <div className="text-2xl md:text-4xl font-bold text-gray-900 mb-2">$12.99<span className="text-base md:text-lg text-gray-600">/yr</span></div>
                     <button
                       onClick={handleAddToCart}
-                      className="px-6 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-all shadow-lg hover:shadow-xl flex items-center gap-2"
+                      className="w-full md:w-auto px-4 md:px-6 py-2.5 md:py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
                     >
                       <FontAwesomeIcon icon={faCartPlus} />
                       Add to Cart
@@ -320,19 +323,19 @@ export default function DomainSearchPage() {
                 {searchResults.slice(1).map((result, index) => (
                   <div
                     key={index}
-                    className={`${result.available ? 'bg-white' : 'bg-gray-50'} rounded-xl border ${result.available ? 'border-gray-200 hover:border-blue-300 hover:shadow-md' : 'border-gray-200'} p-5 transition-all`}
+                    className={`${result.available ? 'bg-white' : 'bg-gray-50'} rounded-xl border ${result.available ? 'border-gray-200 hover:border-blue-300 hover:shadow-md' : 'border-gray-200'} p-4 md:p-5 transition-all`}
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4 flex-1">
-                        <div className={`w-12 h-12 ${result.iconBg} rounded-lg flex items-center justify-center`}>
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                      <div className="flex items-start gap-3 md:gap-4 flex-1">
+                        <div className={`w-10 h-10 md:w-12 md:h-12 ${result.iconBg} rounded-lg flex items-center justify-center flex-shrink-0`}>
                           <FontAwesomeIcon
                             icon={result.available ? faMagnifyingGlass : faXmark}
-                            className={`${result.iconColor} text-xl`}
+                            className={`${result.iconColor} text-lg md:text-xl`}
                           />
                         </div>
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-1">
-                            <span className="text-xl font-bold text-gray-900 font-mono">{result.domain}</span>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-1">
+                            <span className="text-base md:text-xl font-bold text-gray-900 font-mono break-all">{result.domain}</span>
                             {result.available && (
                               <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-semibold">Available</span>
                             )}
@@ -344,33 +347,35 @@ export default function DomainSearchPage() {
                                 {result.badge === 'Trending' && <FontAwesomeIcon icon={faFire} className="text-xs" />}
                                 {result.badge === 'Popular' && <FontAwesomeIcon icon={faBolt} className="text-xs" />}
                                 {result.badge === 'Budget-friendly' && <FontAwesomeIcon icon={faTag} className="text-xs" />}
-                                {result.badge}
+                                <span className="hidden sm:inline">{result.badge}</span>
                               </span>
                             )}
                           </div>
-                          <div className="text-sm text-gray-600">{result.description}</div>
+                          <div className="text-xs md:text-sm text-gray-600">{result.description}</div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-6">
+                      <div className="flex items-center justify-between md:justify-end gap-3 md:gap-6">
                         {result.available ? (
                           <>
-                            <div className="text-right">
+                            <div className="text-left md:text-right">
                               <div className="text-xs text-gray-500 mb-0.5">First year</div>
-                              <div className="text-2xl font-bold text-gray-900">{result.price}<span className="text-sm text-gray-600">/yr</span></div>
+                              <div className="text-xl md:text-2xl font-bold text-gray-900">{result.price}<span className="text-xs md:text-sm text-gray-600">/yr</span></div>
                               <div className="text-xs text-gray-500">Renews at {result.renewalPrice}/yr</div>
                             </div>
                             <button
                               onClick={handleAddToCart}
-                              className="px-5 py-2.5 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center gap-2"
+                              className="px-4 md:px-5 py-2 md:py-2.5 bg-blue-600 text-white rounded-lg text-xs md:text-sm font-medium hover:bg-blue-700 transition-colors flex items-center gap-2 whitespace-nowrap"
                             >
                               <FontAwesomeIcon icon={faCartPlus} />
-                              Add to Cart
+                              <span className="hidden sm:inline">Add to Cart</span>
+                              <span className="sm:hidden">Add</span>
                             </button>
                           </>
                         ) : (
-                          <button className="px-5 py-2.5 bg-white border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors flex items-center gap-2">
+                          <button className="px-4 md:px-5 py-2 md:py-2.5 bg-white border border-gray-300 text-gray-700 rounded-lg text-xs md:text-sm font-medium hover:bg-gray-50 transition-colors flex items-center gap-2">
                             <FontAwesomeIcon icon={faBell} />
-                            Get Notified
+                            <span className="hidden sm:inline">Get Notified</span>
+                            <span className="sm:hidden">Notify</span>
                           </button>
                         )}
                       </div>
@@ -389,13 +394,13 @@ export default function DomainSearchPage() {
           )}
 
           {/* TLD Categories */}
-          <div className="px-8 mb-8">
+          <div className="px-4 md:px-8 mb-8">
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Browse by Category</h2>
-              <p className="text-gray-600">Explore domain extensions organized by industry and purpose</p>
+              <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Browse by Category</h2>
+              <p className="text-sm md:text-base text-gray-600">Explore domain extensions organized by industry and purpose</p>
             </div>
 
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               <div className="bg-white rounded-xl border border-gray-200 p-6 hover:border-blue-300 hover:shadow-lg transition-all cursor-pointer">
                 <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4">
                   <FontAwesomeIcon icon={faBriefcase} className="text-white text-2xl" />
@@ -580,13 +585,13 @@ export default function DomainSearchPage() {
           </div>
 
           {/* Features Section */}
-          <div className="px-8 mb-8">
+          <div className="px-4 md:px-8 mb-8">
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">What's Included with Every Domain</h2>
-              <p className="text-gray-600">Premium features at no extra cost</p>
+              <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">What's Included with Every Domain</h2>
+              <p className="text-sm md:text-base text-gray-600">Premium features at no extra cost</p>
             </div>
 
-            <div className="grid grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200 p-6">
                 <div className="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mb-4">
                   <FontAwesomeIcon icon={faShieldHalved} className="text-white text-xl" />
@@ -622,8 +627,8 @@ export default function DomainSearchPage() {
           </div>
 
           {/* Trust Section */}
-          <div className="px-8 mb-8">
-            <div className="grid grid-cols-3 gap-6">
+          <div className="px-4 md:px-8 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
               <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl p-8 text-white">
                 <div className="text-5xl font-bold mb-2">50K+</div>
                 <div className="text-blue-100 text-lg">Domains Registered</div>
@@ -645,23 +650,23 @@ export default function DomainSearchPage() {
           </div>
 
           {/* CTA Section */}
-          <div className="px-8 pb-8">
-            <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-2xl p-12 text-center text-white">
+          <div className="px-4 md:px-8 pb-8">
+            <div className="bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-2xl p-6 md:p-12 text-center text-white">
               <div className="max-w-3xl mx-auto">
-                <div className="w-20 h-20 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <FontAwesomeIcon icon={faRocket} className="text-4xl" />
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-6">
+                  <FontAwesomeIcon icon={faRocket} className="text-3xl md:text-4xl" />
                 </div>
-                <h2 className="text-4xl font-bold mb-4">Ready to Claim Your Domain?</h2>
-                <p className="text-xl text-blue-100 mb-8">Join thousands of satisfied customers who trust PMC Engine for their domain needs. Get started today with free SSL, WHOIS privacy, and 24/7 support.</p>
-                <div className="flex items-center justify-center gap-4">
+                <h2 className="text-2xl md:text-4xl font-bold mb-3 md:mb-4">Ready to Claim Your Domain?</h2>
+                <p className="text-base md:text-xl text-blue-100 mb-6 md:mb-8">Join thousands of satisfied customers who trust PMC Engine for their domain needs. Get started today with free SSL, WHOIS privacy, and 24/7 support.</p>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
                   <button
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    className="px-8 py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-blue-50 transition-all shadow-xl hover:shadow-2xl flex items-center gap-2 text-lg"
+                    className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-white text-blue-600 rounded-xl font-semibold hover:bg-blue-50 transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 text-base md:text-lg"
                   >
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                     <span>Search Domains</span>
                   </button>
-                  <button className="px-8 py-4 bg-white bg-opacity-20 text-white border-2 border-white rounded-xl font-semibold hover:bg-opacity-30 transition-all flex items-center gap-2 text-lg">
+                  <button className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-white bg-opacity-20 text-white border-2 border-white rounded-xl font-semibold hover:bg-opacity-30 transition-all flex items-center justify-center gap-2 text-base md:text-lg">
                     <FontAwesomeIcon icon={faPhone} />
                     <span>Contact Sales</span>
                   </button>
