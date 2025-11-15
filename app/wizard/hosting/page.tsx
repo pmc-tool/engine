@@ -605,9 +605,9 @@ export default function WizardHostingPage() {
 
                 {/* Summary Sidebar */}
                 <aside className="lg:col-span-1">
-                  <div className="sticky top-24">
+                  <div className="sticky top-6">
                     <div className="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
-                      <h3 className="text-lg font-display font-bold text-stone-900 mb-4">Configuration Summary</h3>
+                      <h2 className="text-xl md:text-2xl font-display font-bold text-stone-900 mb-4">Configuration Summary</h2>
 
                       <div className="space-y-4 mb-6">
                         {/* Theme */}
