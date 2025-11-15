@@ -288,15 +288,16 @@ export default function HomePage() {
             {/* Sites Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredSites.map((site) => (
-                <article key={site.id} className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+                <article key={site.id} className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-2xl hover:border-pmc-red/30 transition-all duration-300 transform hover:-translate-y-1 group">
                   {/* Site Thumbnail */}
                   <div className={`relative h-48 bg-gradient-to-br ${site.gradient} overflow-hidden`}>
                     <Image
                       src={site.image}
                       alt={site.name}
                       fill
-                      className="object-cover opacity-90"
+                      className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="absolute top-3 right-3 flex space-x-2">
                       {getStatusBadge(site.status)}
                       {getPlanBadge(site.plan)}
@@ -331,11 +332,11 @@ export default function HomePage() {
                             <FontAwesomeIcon icon={faArrowUpRightDots} className="mr-1" />
                             Bandwidth
                           </span>
-                          <span className="font-medium">{site.bandwidth.used} GB / {site.bandwidth.total} GB</span>
+                          <span className="font-medium group-hover:text-pmc-red transition-colors">{site.bandwidth.used} GB / {site.bandwidth.total} GB</span>
                         </div>
-                        <div className="w-full bg-slate-200 rounded-full h-1.5">
+                        <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
                           <div
-                            className="bg-blue-600 h-1.5 rounded-full transition-all"
+                            className="bg-gradient-to-r from-pmc-red to-pink-600 h-2 rounded-full transition-all duration-500 group-hover:shadow-lg group-hover:shadow-pmc-red/50"
                             style={{ width: `${site.bandwidth.percent}%` }}
                           ></div>
                         </div>
@@ -347,11 +348,11 @@ export default function HomePage() {
                             <FontAwesomeIcon icon={faDatabase} className="mr-1" />
                             Storage
                           </span>
-                          <span className="font-medium">{site.storage.used} GB / {site.storage.total} GB</span>
+                          <span className="font-medium group-hover:text-pmc-red transition-colors">{site.storage.used} GB / {site.storage.total} GB</span>
                         </div>
-                        <div className="w-full bg-slate-200 rounded-full h-1.5">
+                        <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
                           <div
-                            className="bg-green-600 h-1.5 rounded-full transition-all"
+                            className="bg-gradient-to-r from-purple-600 to-pink-600 h-2 rounded-full transition-all duration-500 group-hover:shadow-lg group-hover:shadow-purple-500/50"
                             style={{ width: `${site.storage.percent}%` }}
                           ></div>
                         </div>
@@ -359,13 +360,13 @@ export default function HomePage() {
                     </div>
 
                     {/* Connects Info */}
-                    <div className="bg-slate-50 rounded-lg p-3 mb-4">
+                    <div className="bg-gradient-to-r from-slate-50 to-pink-50/30 group-hover:from-pink-50 group-hover:to-pmc-red/5 rounded-lg p-3 mb-4 border border-transparent group-hover:border-pmc-red/20 transition-all duration-300">
                       <div className="flex items-center justify-between text-xs">
                         <span className="text-slate-600">
-                          Connects used: <span className="font-bold text-slate-900">{site.connectsUsed}</span>
+                          Connects used: <span className="font-bold text-pmc-red group-hover:scale-110 inline-block transition-transform">{site.connectsUsed}</span>
                         </span>
                         <span className="text-slate-500">
-                          Last AI: <span className="font-medium text-slate-700">{site.lastAI}</span>
+                          Last AI: <span className="font-medium text-slate-700 group-hover:text-pmc-red transition-colors">{site.lastAI}</span>
                         </span>
                       </div>
                     </div>
@@ -374,14 +375,14 @@ export default function HomePage() {
                     <div className="grid grid-cols-2 gap-2 mb-3">
                       <Link
                         href={`/sites/${site.id}/overview`}
-                        className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1"
+                        className="px-3 py-2 bg-gradient-to-r from-pmc-red to-pink-600 hover:from-pmc-red-dark hover:to-pink-700 text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1 shadow-md hover:shadow-lg transition-all transform hover:scale-105"
                       >
                         <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
                         <span>Open Manager</span>
                       </Link>
                       <Link
                         href={`/sites/${site.id}/ai-assistant`}
-                        className="px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1"
+                        className="px-3 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1 shadow-md hover:shadow-lg transition-all transform hover:scale-105"
                       >
                         <FontAwesomeIcon icon={faWandMagicSparkles} />
                         <span>AI Re-customize</span>
@@ -391,14 +392,14 @@ export default function HomePage() {
                     <div className="grid grid-cols-2 gap-2">
                       <Link
                         href={`/sites/${site.id}/content-editor`}
-                        className="px-3 py-2 border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-medium rounded-lg flex items-center justify-center space-x-1"
+                        className="px-3 py-2 border-2 border-pmc-red hover:bg-pmc-red text-pmc-red hover:text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1 transition-all transform hover:scale-105"
                       >
                         <FontAwesomeIcon icon={faPencil} />
                         <span>Edit Content</span>
                       </Link>
                       <Link
                         href={`/domains`}
-                        className="px-3 py-2 border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-medium rounded-lg flex items-center justify-center space-x-1"
+                        className="px-3 py-2 border-2 border-slate-300 hover:border-pmc-red hover:bg-pmc-red/10 text-slate-700 hover:text-pmc-red text-xs font-medium rounded-lg flex items-center justify-center space-x-1 transition-all transform hover:scale-105"
                       >
                         <FontAwesomeIcon icon={faGlobe} />
                         <span>Manage Domain</span>
@@ -409,13 +410,13 @@ export default function HomePage() {
                     <div className="mt-3 pt-3 border-t border-slate-200 flex items-center justify-between">
                       <Link
                         href="/billing"
-                        className="text-xs text-blue-600 hover:text-blue-700 font-medium"
+                        className="text-xs text-pmc-red hover:text-pmc-red-dark font-medium transition-colors"
                       >
                         Upgrade Plan
                       </Link>
                       <Link
                         href={`/sites/${site.id}/logs`}
-                        className="text-xs text-slate-600 hover:text-slate-700 font-medium flex items-center space-x-1"
+                        className="text-xs text-slate-600 hover:text-pmc-red font-medium flex items-center space-x-1 transition-colors"
                       >
                         <FontAwesomeIcon icon={faFileLines} />
                         <span>View Logs</span>
@@ -428,7 +429,7 @@ export default function HomePage() {
           </section>
 
           {/* Quick Actions */}
-          <section className="mx-4 md:mx-6 lg:mx-8 mt-12 mb-8 bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl border border-blue-100 p-6 md:p-8">
+          <section className="mx-4 md:mx-6 lg:mx-8 mt-12 mb-8 bg-gradient-to-br from-pink-50 to-pmc-red/10 rounded-2xl border border-pmc-red/20 p-6 md:p-8">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-slate-900 mb-2">Quick Actions</h2>
               <p className="text-slate-600">Get started with common tasks</p>
@@ -436,46 +437,46 @@ export default function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <Link
                 href="/wizard/theme"
-                className="bg-white hover:bg-slate-50 border border-slate-200 rounded-xl p-6 text-left transition-all block"
+                className="bg-white hover:bg-gradient-to-br hover:from-pmc-red hover:to-pink-600 border border-slate-200 hover:border-pmc-red rounded-xl p-6 text-left transition-all duration-300 block group/action hover:shadow-xl hover:-translate-y-1"
               >
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <FontAwesomeIcon icon={faPlus} className="text-blue-600 text-xl" />
+                <div className="w-12 h-12 bg-pmc-red/10 group-hover/action:bg-white rounded-lg flex items-center justify-center mb-4 transition-colors">
+                  <FontAwesomeIcon icon={faPlus} className="text-pmc-red group-hover/action:text-pmc-red text-xl transition-colors" />
                 </div>
-                <h3 className="font-semibold text-slate-900 mb-1">Create New Site</h3>
-                <p className="text-sm text-slate-600">Start a new project with AI wizard</p>
+                <h3 className="font-semibold text-slate-900 group-hover/action:text-white mb-1 transition-colors">Create New Site</h3>
+                <p className="text-sm text-slate-600 group-hover/action:text-white/90 transition-colors">Start a new project with AI wizard</p>
               </Link>
 
               <Link
                 href="/billing"
-                className="bg-white hover:bg-slate-50 border border-slate-200 rounded-xl p-6 text-left transition-all block"
+                className="bg-white hover:bg-gradient-to-br hover:from-purple-600 hover:to-pink-600 border border-slate-200 hover:border-purple-600 rounded-xl p-6 text-left transition-all duration-300 block group/action hover:shadow-xl hover:-translate-y-1"
               >
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                  <FontAwesomeIcon icon={faBolt} className="text-purple-600 text-xl" />
+                <div className="w-12 h-12 bg-purple-100 group-hover/action:bg-white rounded-lg flex items-center justify-center mb-4 transition-colors">
+                  <FontAwesomeIcon icon={faBolt} className="text-purple-600 group-hover/action:text-purple-600 text-xl transition-colors" />
                 </div>
-                <h3 className="font-semibold text-slate-900 mb-1">Buy Connects</h3>
-                <p className="text-sm text-slate-600">Get more AI customization power</p>
+                <h3 className="font-semibold text-slate-900 group-hover/action:text-white mb-1 transition-colors">Buy Connects</h3>
+                <p className="text-sm text-slate-600 group-hover/action:text-white/90 transition-colors">Get more AI customization power</p>
               </Link>
 
               <Link
                 href="/wizard/theme"
-                className="bg-white hover:bg-slate-50 border border-slate-200 rounded-xl p-6 text-left transition-all block"
+                className="bg-white hover:bg-gradient-to-br hover:from-pmc-red hover:to-pink-600 border border-slate-200 hover:border-pmc-red rounded-xl p-6 text-left transition-all duration-300 block group/action hover:shadow-xl hover:-translate-y-1"
               >
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                  <FontAwesomeIcon icon={faLayerGroup} className="text-green-600 text-xl" />
+                <div className="w-12 h-12 bg-pmc-red/10 group-hover/action:bg-white rounded-lg flex items-center justify-center mb-4 transition-colors">
+                  <FontAwesomeIcon icon={faLayerGroup} className="text-pmc-red group-hover/action:text-pmc-red text-xl transition-colors" />
                 </div>
-                <h3 className="font-semibold text-slate-900 mb-1">Browse Templates</h3>
-                <p className="text-sm text-slate-600">Explore pre-built site templates</p>
+                <h3 className="font-semibold text-slate-900 group-hover/action:text-white mb-1 transition-colors">Browse Templates</h3>
+                <p className="text-sm text-slate-600 group-hover/action:text-white/90 transition-colors">Explore pre-built site templates</p>
               </Link>
 
               <Link
                 href="/support"
-                className="bg-white hover:bg-slate-50 border border-slate-200 rounded-xl p-6 text-left transition-all block"
+                className="bg-white hover:bg-gradient-to-br hover:from-pmc-red hover:to-pink-600 border border-slate-200 hover:border-pmc-red rounded-xl p-6 text-left transition-all duration-300 block group/action hover:shadow-xl hover:-translate-y-1"
               >
-                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
-                  <FontAwesomeIcon icon={faBook} className="text-orange-600 text-xl" />
+                <div className="w-12 h-12 bg-pmc-red/10 group-hover/action:bg-white rounded-lg flex items-center justify-center mb-4 transition-colors">
+                  <FontAwesomeIcon icon={faBook} className="text-pmc-red group-hover/action:text-pmc-red text-xl transition-colors" />
                 </div>
-                <h3 className="font-semibold text-slate-900 mb-1">Documentation</h3>
-                <p className="text-sm text-slate-600">Learn how to use PMC Engine</p>
+                <h3 className="font-semibold text-slate-900 group-hover/action:text-white mb-1 transition-colors">Documentation</h3>
+                <p className="text-sm text-slate-600 group-hover/action:text-white/90 transition-colors">Learn how to use PMC Engine</p>
               </Link>
             </div>
           </section>
