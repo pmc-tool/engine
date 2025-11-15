@@ -398,7 +398,9 @@ export default function HomePage() {
             </div>
 
             {/* Stats Overview */}
-            <div className="mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="mb-8 bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-xl p-6 md:p-8">
+              <h2 className="text-lg font-bold text-slate-900 mb-6">Overview</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Total Sites */}
               <div className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-md hover:border-slate-300 transition-all">
                 <div className="flex items-center justify-between mb-4">
@@ -453,6 +455,7 @@ export default function HomePage() {
                 </div>
                 <div className="text-3xl font-bold text-slate-900 mb-1">{totalVisitors}</div>
                 <div className="text-sm text-slate-600">Total Visitors</div>
+              </div>
               </div>
             </div>
 
