@@ -233,35 +233,46 @@ export default function HomePage() {
             </div>
 
             {/* Filters */}
-            <div className="mb-6 bg-white rounded-xl border border-slate-200 p-4">
+            <div className="mb-6 bg-gradient-to-r from-white via-slate-50 to-white rounded-2xl border-2 border-slate-200 p-5 shadow-lg hover:shadow-xl transition-shadow">
               <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                 <div className="flex items-center space-x-3 flex-1 w-full md:w-auto">
-                  <div className="relative flex-1 md:w-96">
+                  <div className="relative flex-1 md:w-96 group">
                     <input
                       type="text"
                       placeholder="Search sites..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pmc-red focus:border-transparent"
+                      className="w-full pl-11 pr-4 py-3 border-2 border-slate-300 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-pmc-red focus:border-pmc-red transition-all bg-white hover:border-slate-400 group-hover:shadow-md"
                     />
                     <FontAwesomeIcon
                       icon={faSearch}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                      className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors ${
+                        searchTerm ? 'text-pmc-red' : 'text-slate-400'
+                      }`}
                     />
+                    {searchTerm && (
+                      <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                        <span className="text-xs font-semibold text-pmc-red bg-pmc-red/10 px-2 py-1 rounded-full">
+                          {filteredSites.length} found
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <div className="relative">
                     <button
                       onClick={() => setShowFilterDropdown(!showFilterDropdown)}
-                      className={`px-4 py-2 border-2 rounded-lg transition flex items-center space-x-2 ${
+                      className={`px-4 py-3 border-2 rounded-xl transition-all flex items-center gap-2 font-semibold shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95 ${
                         statusFilter !== 'all' || planFilter !== 'all'
-                          ? 'border-pmc-red bg-pmc-red/5 text-pmc-red'
-                          : 'border-slate-300 text-slate-700 hover:bg-slate-50'
+                          ? 'border-pmc-red bg-gradient-to-r from-pmc-red to-pink-600 text-white shadow-pmc-red/30'
+                          : 'border-slate-300 text-slate-700 hover:border-pmc-red hover:bg-slate-50'
                       }`}
                     >
-                      <FontAwesomeIcon icon={faFilter} />
+                      <FontAwesomeIcon icon={faFilter} className="text-sm" />
                       <span className="hidden sm:inline">Filter</span>
                       {(statusFilter !== 'all' || planFilter !== 'all') && (
-                        <span className="ml-1 w-2 h-2 bg-pmc-red rounded-full"></span>
+                        <span className="flex items-center justify-center w-5 h-5 bg-white text-pmc-red text-xs font-bold rounded-full">
+                          {[statusFilter !== 'all' ? 1 : 0, planFilter !== 'all' ? 1 : 0].reduce((a, b) => a + b)}
+                        </span>
                       )}
                     </button>
 
@@ -269,40 +280,54 @@ export default function HomePage() {
                     {showFilterDropdown && (
                       <>
                         <div
-                          className="fixed inset-0 z-30"
+                          className="fixed inset-0 z-30 backdrop-blur-sm bg-black/5"
                           onClick={() => setShowFilterDropdown(false)}
                         />
-                        <div className="absolute top-full right-0 mt-2 w-72 bg-white rounded-xl border-2 border-pmc-red/20 shadow-2xl z-40 overflow-hidden">
-                          <div className="px-4 py-3 bg-gradient-to-r from-pmc-red/5 to-pink-50 border-b border-pmc-red/10">
+                        <div className="absolute top-full right-0 mt-3 w-80 bg-white rounded-2xl border-2 border-pmc-red/30 shadow-2xl z-40 overflow-hidden animate-in slide-in-from-top-2 duration-200">
+                          <div className="px-5 py-4 bg-gradient-to-r from-pmc-red/10 via-pink-50 to-pmc-red/10 border-b-2 border-pmc-red/20">
                             <div className="flex items-center justify-between">
-                              <h3 className="font-semibold text-slate-900">Filters</h3>
+                              <div className="flex items-center gap-2">
+                                <div className="w-8 h-8 bg-gradient-to-br from-pmc-red to-pink-600 rounded-lg flex items-center justify-center">
+                                  <FontAwesomeIcon icon={faFilter} className="text-white text-sm" />
+                                </div>
+                                <h3 className="font-bold text-slate-900">Filters</h3>
+                              </div>
                               <button
                                 onClick={clearFilters}
-                                className="text-xs text-pmc-red hover:text-pmc-red-dark font-medium"
+                                className="text-xs text-pmc-red hover:text-pmc-red-dark font-bold bg-pmc-red/10 hover:bg-pmc-red/20 px-3 py-1.5 rounded-lg transition-all"
                               >
                                 Clear all
                               </button>
                             </div>
                           </div>
 
-                          <div className="p-4 space-y-4">
+                          <div className="p-5 space-y-5">
                             {/* Status Filter */}
                             <div>
-                              <label className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-2 block">
+                              <label className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-2">
+                                <FontAwesomeIcon icon={faCircleCheck} className="text-pmc-red" />
                                 Status
                               </label>
                               <div className="space-y-2">
-                                {['all', 'live', 'deploying'].map((status) => (
+                                {[
+                                  { value: 'all', label: 'All Sites', icon: faGlobe },
+                                  { value: 'live', label: 'Live', icon: faCircleCheck },
+                                  { value: 'deploying', label: 'Deploying', icon: faBolt }
+                                ].map((status) => (
                                   <button
-                                    key={status}
-                                    onClick={() => setStatusFilter(status as any)}
-                                    className={`w-full px-3 py-2 rounded-lg text-left text-sm transition-all ${
-                                      statusFilter === status
-                                        ? 'bg-gradient-to-r from-pmc-red to-pink-600 text-white shadow-md'
-                                        : 'bg-slate-50 text-slate-700 hover:bg-slate-100'
+                                    key={status.value}
+                                    onClick={() => setStatusFilter(status.value as any)}
+                                    className={`w-full px-4 py-3 rounded-xl text-left text-sm font-semibold transition-all flex items-center gap-3 ${
+                                      statusFilter === status.value
+                                        ? 'bg-gradient-to-r from-pmc-red to-pink-600 text-white shadow-lg shadow-pmc-red/30 scale-105'
+                                        : 'bg-slate-50 text-slate-700 hover:bg-slate-100 hover:scale-102 border border-slate-200'
                                     }`}
                                   >
-                                    {status.charAt(0).toUpperCase() + status.slice(1)}
+                                    <FontAwesomeIcon icon={status.icon} className="text-sm" />
+                                    {status.label}
+                                    {statusFilter === status.value && (
+                                      <FontAwesomeIcon icon={faCircleCheck} className="ml-auto text-sm" />
+                                    )}
                                   </button>
                                 ))}
                               </div>
@@ -310,31 +335,41 @@ export default function HomePage() {
 
                             {/* Plan Filter */}
                             <div>
-                              <label className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-2 block">
+                              <label className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-2">
+                                <FontAwesomeIcon icon={faBolt} className="text-pmc-red" />
                                 Plan
                               </label>
                               <div className="space-y-2">
-                                {['all', 'Starter', 'Pro', 'Scale'].map((plan) => (
+                                {[
+                                  { value: 'all', label: 'All Plans', icon: faLayerGroup },
+                                  { value: 'Starter', label: 'Starter', icon: faGlobe },
+                                  { value: 'Pro', label: 'Pro', icon: faBolt },
+                                  { value: 'Scale', label: 'Scale', icon: faChartLine }
+                                ].map((plan) => (
                                   <button
-                                    key={plan}
-                                    onClick={() => setPlanFilter(plan as any)}
-                                    className={`w-full px-3 py-2 rounded-lg text-left text-sm transition-all ${
-                                      planFilter === plan
-                                        ? 'bg-gradient-to-r from-pmc-red to-pink-600 text-white shadow-md'
-                                        : 'bg-slate-50 text-slate-700 hover:bg-slate-100'
+                                    key={plan.value}
+                                    onClick={() => setPlanFilter(plan.value as any)}
+                                    className={`w-full px-4 py-3 rounded-xl text-left text-sm font-semibold transition-all flex items-center gap-3 ${
+                                      planFilter === plan.value
+                                        ? 'bg-gradient-to-r from-pmc-red to-pink-600 text-white shadow-lg shadow-pmc-red/30 scale-105'
+                                        : 'bg-slate-50 text-slate-700 hover:bg-slate-100 hover:scale-102 border border-slate-200'
                                     }`}
                                   >
-                                    {plan}
+                                    <FontAwesomeIcon icon={plan.icon} className="text-sm" />
+                                    {plan.label}
+                                    {planFilter === plan.value && (
+                                      <FontAwesomeIcon icon={faCircleCheck} className="ml-auto text-sm" />
+                                    )}
                                   </button>
                                 ))}
                               </div>
                             </div>
                           </div>
 
-                          <div className="px-4 py-3 bg-slate-50 border-t border-slate-200">
+                          <div className="px-5 py-4 bg-gradient-to-r from-slate-50 to-slate-100 border-t-2 border-slate-200">
                             <button
                               onClick={() => setShowFilterDropdown(false)}
-                              className="w-full px-4 py-2 bg-gradient-to-r from-pmc-red to-pink-600 text-white rounded-lg font-medium hover:from-pmc-red-dark hover:to-pink-700 transition-all"
+                              className="w-full px-4 py-3 bg-gradient-to-r from-pmc-red to-pink-600 text-white rounded-xl font-bold hover:from-pmc-red-dark hover:to-pink-700 transition-all shadow-lg shadow-pmc-red/30 hover:shadow-xl hover:shadow-pmc-red/50 transform hover:scale-105 active:scale-95"
                             >
                               Apply Filters
                             </button>
@@ -344,22 +379,28 @@ export default function HomePage() {
                     )}
                   </div>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center gap-2 bg-slate-100 p-1.5 rounded-xl border-2 border-slate-200">
                   <button
                     onClick={() => setViewMode('grid')}
-                    className={`p-2 rounded-lg transition ${
-                      viewMode === 'grid' ? 'bg-pmc-red text-white' : 'text-slate-400 hover:bg-slate-100'
+                    className={`px-4 py-2.5 rounded-lg transition-all font-semibold flex items-center gap-2 ${
+                      viewMode === 'grid'
+                        ? 'bg-gradient-to-r from-pmc-red to-pink-600 text-white shadow-lg shadow-pmc-red/30 scale-105'
+                        : 'text-slate-600 hover:bg-white hover:text-slate-900 hover:shadow-md'
                     }`}
                   >
-                    <FontAwesomeIcon icon={faGrip} />
+                    <FontAwesomeIcon icon={faGrip} className="text-sm" />
+                    <span className="hidden sm:inline text-xs">Grid</span>
                   </button>
                   <button
                     onClick={() => setViewMode('list')}
-                    className={`p-2 rounded-lg transition ${
-                      viewMode === 'list' ? 'bg-pmc-red text-white' : 'text-slate-400 hover:bg-slate-100'
+                    className={`px-4 py-2.5 rounded-lg transition-all font-semibold flex items-center gap-2 ${
+                      viewMode === 'list'
+                        ? 'bg-gradient-to-r from-pmc-red to-pink-600 text-white shadow-lg shadow-pmc-red/30 scale-105'
+                        : 'text-slate-600 hover:bg-white hover:text-slate-900 hover:shadow-md'
                     }`}
                   >
-                    <FontAwesomeIcon icon={faList} />
+                    <FontAwesomeIcon icon={faList} className="text-sm" />
+                    <span className="hidden sm:inline text-xs">List</span>
                   </button>
                 </div>
               </div>
