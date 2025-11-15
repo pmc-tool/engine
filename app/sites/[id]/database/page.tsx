@@ -209,496 +209,497 @@ LIMIT 25;`);
                 </div>
               </div>
 
-            {/* Database Tabs */}
-            <section className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/50 shadow-lg overflow-hidden">
-              <div className="border-b border-slate-200">
-                <nav className="flex space-x-4 md:space-x-8 px-4 md:px-6">
-                  <button
-                    onClick={() => setActiveTab('tables')}
-                    className={`py-3 md:py-4 px-2 border-b-2 font-semibold text-xs md:text-sm flex items-center space-x-2 transition-all ${
-                      activeTab === 'tables'
-                        ? 'border-blue-600 text-blue-600'
-                        : 'border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300'
-                    }`}
-                  >
-                    <FontAwesomeIcon icon={faTable} />
-                    <span>Tables</span>
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('query')}
-                    className={`py-3 md:py-4 px-2 border-b-2 font-semibold text-xs md:text-sm flex items-center space-x-2 transition-all ${
-                      activeTab === 'query'
-                        ? 'border-blue-600 text-blue-600'
-                        : 'border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300'
-                    }`}
-                  >
-                    <FontAwesomeIcon icon={faCode} />
-                    <span>Query</span>
-                  </button>
-                </nav>
-              </div>
+              {/* Database Tabs */}
+              <section className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/50 shadow-lg overflow-hidden">
+                <div className="border-b border-slate-200">
+                  <nav className="flex space-x-4 md:space-x-8 px-4 md:px-6">
+                    <button
+                      onClick={() => setActiveTab('tables')}
+                      className={`py-3 md:py-4 px-2 border-b-2 font-semibold text-xs md:text-sm flex items-center space-x-2 transition-all ${
+                        activeTab === 'tables'
+                          ? 'border-blue-600 text-blue-600'
+                          : 'border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300'
+                      }`}
+                    >
+                      <FontAwesomeIcon icon={faTable} />
+                      <span>Tables</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('query')}
+                      className={`py-3 md:py-4 px-2 border-b-2 font-semibold text-xs md:text-sm flex items-center space-x-2 transition-all ${
+                        activeTab === 'query'
+                          ? 'border-blue-600 text-blue-600'
+                          : 'border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300'
+                      }`}
+                    >
+                      <FontAwesomeIcon icon={faCode} />
+                      <span>Query</span>
+                    </button>
+                  </nav>
+                </div>
 
-              {/* Tables Content */}
-              {activeTab === 'tables' && (
-                <div className="p-4 md:p-6">
-                  <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                    <div className="relative flex-1 max-w-md">
-                      <FontAwesomeIcon icon={faSearch} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" />
-                      <input
-                        type="text"
-                        placeholder="Search tables..."
-                        className="w-full pl-10 pr-4 py-2 md:py-2.5 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      />
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-xs md:text-sm text-slate-600">{databaseTables.length} tables found</span>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
-                    {/* Tables List */}
-                    <div className="lg:col-span-1 space-y-2">
-                      {databaseTables.map((table) => (
-                        <div
-                          key={table.name}
-                          className={`rounded-xl p-4 cursor-pointer transition-all ${
-                            table.selected
-                              ? 'bg-gradient-to-r from-blue-50 to-purple-50 border-l-4 border-blue-600 shadow-md'
-                              : 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md'
-                          }`}
-                        >
-                          <div className="flex items-center justify-between mb-2">
-                            <h3 className="font-semibold text-slate-900 text-sm md:text-base">{table.name}</h3>
-                            <span className={`px-2 py-1 text-xs font-semibold rounded-lg ${
-                              table.selected ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-700'
-                            }`}>
-                              {table.rows.toLocaleString()}
-                            </span>
-                          </div>
-                          <p className="text-xs text-slate-600">{table.description}</p>
-                        </div>
-                      ))}
+                {/* Tables Content */}
+                {activeTab === 'tables' && (
+                  <div className="p-4 md:p-6">
+                    <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                      <div className="relative flex-1 max-w-md">
+                        <FontAwesomeIcon icon={faSearch} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" />
+                        <input
+                          type="text"
+                          placeholder="Search tables..."
+                          className="w-full pl-10 pr-4 py-2 md:py-2.5 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        />
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-xs md:text-sm text-slate-600">{databaseTables.length} tables found</span>
+                      </div>
                     </div>
 
-                    {/* Table Details */}
-                    <div className="lg:col-span-2 bg-gradient-to-br from-slate-50 to-blue-50/30 rounded-xl border border-slate-200 p-4 md:p-6 shadow-md">
-                      <div className="mb-4">
-                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-4">
-                          <div>
-                            <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-1">users</h3>
-                            <p className="text-xs md:text-sm text-slate-600">User accounts and profiles</p>
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+                      {/* Tables List */}
+                      <div className="lg:col-span-1 space-y-2">
+                        {databaseTables.map((table) => (
+                          <div
+                            key={table.name}
+                            className={`rounded-xl p-4 cursor-pointer transition-all ${
+                              table.selected
+                                ? 'bg-gradient-to-r from-blue-50 to-purple-50 border-l-4 border-blue-600 shadow-md'
+                                : 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md'
+                            }`}
+                          >
+                            <div className="flex items-center justify-between mb-2">
+                              <h3 className="font-semibold text-slate-900 text-sm md:text-base">{table.name}</h3>
+                              <span className={`px-2 py-1 text-xs font-semibold rounded-lg ${
+                                table.selected ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-700'
+                              }`}>
+                                {table.rows.toLocaleString()}
+                              </span>
+                            </div>
+                            <p className="text-xs text-slate-600">{table.description}</p>
                           </div>
-                          <div className="flex items-center space-x-2">
-                            <button className="px-3 py-2 bg-white border border-slate-300 hover:bg-slate-50 hover:shadow-md text-slate-700 text-xs font-semibold rounded-lg transition-all flex items-center gap-1">
-                              <FontAwesomeIcon icon={faArrowsRotate} />
-                              <span className="hidden sm:inline">Refresh</span>
-                            </button>
-                            <button className="px-3 py-2 bg-white border border-slate-300 hover:bg-slate-50 hover:shadow-md text-slate-700 text-xs font-semibold rounded-lg transition-all flex items-center gap-1">
-                              <FontAwesomeIcon icon={faDownload} />
-                              <span className="hidden sm:inline">Export</span>
-                            </button>
-                          </div>
-                        </div>
+                        ))}
+                      </div>
 
-                        {/* Table Schema */}
-                        <div className="bg-white rounded-xl border border-slate-200 overflow-hidden mb-4 shadow-sm">
-                          <div className="px-4 py-3 bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200">
-                            <h4 className="text-sm font-bold text-slate-900">Table Schema</h4>
-                          </div>
-                          <div className="overflow-x-auto">
-                            <table className="w-full text-xs md:text-sm">
-                              <thead className="bg-slate-50 border-b border-slate-200">
-                                <tr>
-                                  <th className="px-3 md:px-4 py-3 text-left font-semibold text-slate-700">Column Name</th>
-                                  <th className="px-3 md:px-4 py-3 text-left font-semibold text-slate-700">Type</th>
-                                  <th className="px-3 md:px-4 py-3 text-left font-semibold text-slate-700">Nullable</th>
-                                  <th className="px-3 md:px-4 py-3 text-left font-semibold text-slate-700">Default</th>
-                                </tr>
-                              </thead>
-                              <tbody className="divide-y divide-slate-200">
-                                {tableColumns.map((col) => (
-                                  <tr key={col.name} className="hover:bg-slate-50 transition-colors">
-                                    <td className="px-3 md:px-4 py-3 font-semibold text-slate-900">{col.name}</td>
-                                    <td className="px-3 md:px-4 py-3 text-slate-600">{col.type}</td>
-                                    <td className="px-3 md:px-4 py-3 text-slate-600">{col.nullable}</td>
-                                    <td className="px-3 md:px-4 py-3 text-slate-600 text-xs">{col.default}</td>
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-
-                        {/* Table Data */}
-                        <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
-                          <div className="px-4 py-3 bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                            <h4 className="text-sm font-bold text-slate-900">Table Data (Read-Only)</h4>
+                      {/* Table Details */}
+                      <div className="lg:col-span-2 bg-gradient-to-br from-slate-50 to-blue-50/30 rounded-xl border border-slate-200 p-4 md:p-6 shadow-md">
+                        <div className="mb-4">
+                          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-4">
+                            <div>
+                              <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-1">users</h3>
+                              <p className="text-xs md:text-sm text-slate-600">User accounts and profiles</p>
+                            </div>
                             <div className="flex items-center space-x-2">
-                              <span className="text-xs text-gray-600">Showing 1-10 of 1,247 rows</span>
-                              <div className="flex space-x-1">
-                                <button className="px-2 py-1 bg-white border border-gray-300 rounded text-xs text-gray-400 cursor-not-allowed">
-                                  <FontAwesomeIcon icon={faChevronLeft} />
-                                </button>
-                                <button className="px-2 py-1 bg-blue-600 text-white rounded text-xs font-medium">1</button>
-                                <button className="px-2 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50">2</button>
-                                <button className="px-2 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50">
-                                  <FontAwesomeIcon icon={faChevronRight} />
-                                </button>
-                              </div>
+                              <button className="px-3 py-2 bg-white border border-slate-300 hover:bg-slate-50 hover:shadow-md text-slate-700 text-xs font-semibold rounded-lg transition-all flex items-center gap-1">
+                                <FontAwesomeIcon icon={faArrowsRotate} />
+                                <span className="hidden sm:inline">Refresh</span>
+                              </button>
+                              <button className="px-3 py-2 bg-white border border-slate-300 hover:bg-slate-50 hover:shadow-md text-slate-700 text-xs font-semibold rounded-lg transition-all flex items-center gap-1">
+                                <FontAwesomeIcon icon={faDownload} />
+                                <span className="hidden sm:inline">Export</span>
+                              </button>
                             </div>
                           </div>
-                          <div className="overflow-x-auto">
-                            <table className="w-full text-sm">
-                              <thead className="bg-gray-50 border-b border-gray-200">
-                                <tr>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">id</th>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">username</th>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">email</th>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">first_name</th>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">last_name</th>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">status</th>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">created_at</th>
-                                </tr>
-                              </thead>
-                              <tbody className="divide-y divide-gray-200">
-                                {tableData.map((row) => (
-                                  <tr key={row.id} className="hover:bg-gray-50">
-                                    <td className="px-4 py-3 text-gray-900">{row.id}</td>
-                                    <td className="px-4 py-3 text-gray-900">{row.username}</td>
-                                    <td className="px-4 py-3 text-gray-600">{row.email}</td>
-                                    <td className="px-4 py-3 text-gray-600">{row.first_name}</td>
-                                    <td className="px-4 py-3 text-gray-600">{row.last_name}</td>
-                                    <td className="px-4 py-3">
-                                      <span className={`px-2 py-1 text-xs font-medium rounded ${getStatusBadgeColor(row.status)}`}>
-                                        {row.status}
-                                      </span>
-                                    </td>
-                                    <td className="px-4 py-3 text-gray-600">{row.created_at}</td>
+
+                          {/* Table Schema */}
+                          <div className="bg-white rounded-xl border border-slate-200 overflow-hidden mb-4 shadow-sm">
+                            <div className="px-4 py-3 bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200">
+                              <h4 className="text-sm font-bold text-slate-900">Table Schema</h4>
+                            </div>
+                            <div className="overflow-x-auto">
+                              <table className="w-full text-xs md:text-sm">
+                                <thead className="bg-slate-50 border-b border-slate-200">
+                                  <tr>
+                                    <th className="px-3 md:px-4 py-3 text-left font-semibold text-slate-700">Column Name</th>
+                                    <th className="px-3 md:px-4 py-3 text-left font-semibold text-slate-700">Type</th>
+                                    <th className="px-3 md:px-4 py-3 text-left font-semibold text-slate-700">Nullable</th>
+                                    <th className="px-3 md:px-4 py-3 text-left font-semibold text-slate-700">Default</th>
                                   </tr>
-                                ))}
-                              </tbody>
-                            </table>
+                                </thead>
+                                <tbody className="divide-y divide-slate-200">
+                                  {tableColumns.map((col) => (
+                                    <tr key={col.name} className="hover:bg-slate-50 transition-colors">
+                                      <td className="px-3 md:px-4 py-3 font-semibold text-slate-900">{col.name}</td>
+                                      <td className="px-3 md:px-4 py-3 text-slate-600">{col.type}</td>
+                                      <td className="px-3 md:px-4 py-3 text-slate-600">{col.nullable}</td>
+                                      <td className="px-3 md:px-4 py-3 text-slate-600 text-xs">{col.default}</td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+
+                          {/* Table Data */}
+                          <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+                            <div className="px-4 py-3 bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                              <h4 className="text-sm font-bold text-slate-900">Table Data (Read-Only)</h4>
+                              <div className="flex items-center space-x-2">
+                                <span className="text-xs text-gray-600">Showing 1-10 of 1,247 rows</span>
+                                <div className="flex space-x-1">
+                                  <button className="px-2 py-1 bg-white border border-gray-300 rounded text-xs text-gray-400 cursor-not-allowed">
+                                    <FontAwesomeIcon icon={faChevronLeft} />
+                                  </button>
+                                  <button className="px-2 py-1 bg-blue-600 text-white rounded text-xs font-medium">1</button>
+                                  <button className="px-2 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50">2</button>
+                                  <button className="px-2 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50">
+                                    <FontAwesomeIcon icon={faChevronRight} />
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="overflow-x-auto">
+                              <table className="w-full text-sm">
+                                <thead className="bg-gray-50 border-b border-gray-200">
+                                  <tr>
+                                    <th className="px-4 py-3 text-left font-semibold text-gray-700">id</th>
+                                    <th className="px-4 py-3 text-left font-semibold text-gray-700">username</th>
+                                    <th className="px-4 py-3 text-left font-semibold text-gray-700">email</th>
+                                    <th className="px-4 py-3 text-left font-semibold text-gray-700">first_name</th>
+                                    <th className="px-4 py-3 text-left font-semibold text-gray-700">last_name</th>
+                                    <th className="px-4 py-3 text-left font-semibold text-gray-700">status</th>
+                                    <th className="px-4 py-3 text-left font-semibold text-gray-700">created_at</th>
+                                  </tr>
+                                </thead>
+                                <tbody className="divide-y divide-gray-200">
+                                  {tableData.map((row) => (
+                                    <tr key={row.id} className="hover:bg-gray-50">
+                                      <td className="px-4 py-3 text-gray-900">{row.id}</td>
+                                      <td className="px-4 py-3 text-gray-900">{row.username}</td>
+                                      <td className="px-4 py-3 text-gray-600">{row.email}</td>
+                                      <td className="px-4 py-3 text-gray-600">{row.first_name}</td>
+                                      <td className="px-4 py-3 text-gray-600">{row.last_name}</td>
+                                      <td className="px-4 py-3">
+                                        <span className={`px-2 py-1 text-xs font-medium rounded ${getStatusBadgeColor(row.status)}`}>
+                                          {row.status}
+                                        </span>
+                                      </td>
+                                      <td className="px-4 py-3 text-gray-600">{row.created_at}</td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              )}
+                )}
 
-              {/* Query Content */}
-              {activeTab === 'query' && (
-                <div className="p-6">
-                  <div className="mb-4">
-                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 flex items-start space-x-3 mb-6">
-                      <FontAwesomeIcon icon={faTriangleExclamation} className="text-yellow-600 mt-0.5" />
-                      <div className="flex-1">
-                        <h4 className="text-sm font-semibold text-yellow-900 mb-1">Safe Query Mode</h4>
-                        <p className="text-xs text-yellow-800">Only SELECT queries are allowed for safety. Write operations require explicit confirmation and are disabled by default.</p>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                      <div className="lg:col-span-2">
-                        <div className="mb-4">
-                          <label className="block text-sm font-semibold text-gray-900 mb-2">SQL Query</label>
-                          <textarea
-                            className="w-full h-64 px-4 py-3 border border-gray-300 rounded-lg text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-                            placeholder="Enter your SQL query here..."
-                            value={sqlQuery}
-                            onChange={(e) => setSqlQuery(e.target.value)}
-                          />
-                        </div>
-
-                        <div className="flex items-center justify-between mb-6">
-                          <div className="flex items-center space-x-2">
-                            <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg flex items-center space-x-2">
-                              <FontAwesomeIcon icon={faPlay} />
-                              <span>Run Query</span>
-                            </button>
-                            <button className="px-4 py-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium rounded-lg flex items-center space-x-2">
-                              <FontAwesomeIcon icon={faEraser} />
-                              <span>Clear</span>
-                            </button>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <button className="px-4 py-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium rounded-lg flex items-center space-x-2">
-                              <FontAwesomeIcon icon={faDownload} />
-                              <span>Export Results</span>
-                            </button>
-                          </div>
-                        </div>
-
-                        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-                          <div className="px-4 py-3 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
-                            <h4 className="text-sm font-semibold text-gray-900">Query Results</h4>
-                            <span className="text-xs text-gray-600">25 rows returned in 0.043s</span>
-                          </div>
-                          <div className="overflow-x-auto">
-                            <table className="w-full text-sm">
-                              <thead className="bg-gray-50 border-b border-gray-200">
-                                <tr>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">id</th>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">username</th>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">email</th>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">first_name</th>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">last_name</th>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">status</th>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">created_at</th>
-                                </tr>
-                              </thead>
-                              <tbody className="divide-y divide-gray-200">
-                                <tr className="hover:bg-gray-50">
-                                  <td className="px-4 py-3 text-gray-900">1247</td>
-                                  <td className="px-4 py-3 text-gray-900">alex_turner</td>
-                                  <td className="px-4 py-3 text-gray-600">alex.turner@example.com</td>
-                                  <td className="px-4 py-3 text-gray-600">Alex</td>
-                                  <td className="px-4 py-3 text-gray-600">Turner</td>
-                                  <td className="px-4 py-3"><span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">active</span></td>
-                                  <td className="px-4 py-3 text-gray-600">2024-03-15 18:42:33</td>
-                                </tr>
-                                <tr className="hover:bg-gray-50">
-                                  <td className="px-4 py-3 text-gray-900">1246</td>
-                                  <td className="px-4 py-3 text-gray-900">jessica_lee</td>
-                                  <td className="px-4 py-3 text-gray-600">jessica.lee@example.com</td>
-                                  <td className="px-4 py-3 text-gray-600">Jessica</td>
-                                  <td className="px-4 py-3 text-gray-600">Lee</td>
-                                  <td className="px-4 py-3"><span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">active</span></td>
-                                  <td className="px-4 py-3 text-gray-600">2024-03-15 17:28:19</td>
-                                </tr>
-                                <tr className="hover:bg-gray-50">
-                                  <td className="px-4 py-3 text-gray-900">1245</td>
-                                  <td className="px-4 py-3 text-gray-900">chris_evans</td>
-                                  <td className="px-4 py-3 text-gray-600">c.evans@example.com</td>
-                                  <td className="px-4 py-3 text-gray-600">Christopher</td>
-                                  <td className="px-4 py-3 text-gray-600">Evans</td>
-                                  <td className="px-4 py-3"><span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">active</span></td>
-                                  <td className="px-4 py-3 text-gray-600">2024-03-15 16:15:47</td>
-                                </tr>
-                                <tr className="hover:bg-gray-50">
-                                  <td className="px-4 py-3 text-gray-900">1244</td>
-                                  <td className="px-4 py-3 text-gray-900">amanda_white</td>
-                                  <td className="px-4 py-3 text-gray-600">amanda.w@example.com</td>
-                                  <td className="px-4 py-3 text-gray-600">Amanda</td>
-                                  <td className="px-4 py-3 text-gray-600">White</td>
-                                  <td className="px-4 py-3"><span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">active</span></td>
-                                  <td className="px-4 py-3 text-gray-600">2024-03-15 14:52:08</td>
-                                </tr>
-                                <tr className="hover:bg-gray-50">
-                                  <td className="px-4 py-3 text-gray-900">1243</td>
-                                  <td className="px-4 py-3 text-gray-900">kevin_harris</td>
-                                  <td className="px-4 py-3 text-gray-600">kevin.harris@example.com</td>
-                                  <td className="px-4 py-3 text-gray-600">Kevin</td>
-                                  <td className="px-4 py-3 text-gray-600">Harris</td>
-                                  <td className="px-4 py-3"><span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">active</span></td>
-                                  <td className="px-4 py-3 text-gray-600">2024-03-15 13:38:22</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
+                {/* Query Content */}
+                {activeTab === 'query' && (
+                  <div className="p-6">
+                    <div className="mb-4">
+                      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 flex items-start space-x-3 mb-6">
+                        <FontAwesomeIcon icon={faTriangleExclamation} className="text-yellow-600 mt-0.5" />
+                        <div className="flex-1">
+                          <h4 className="text-sm font-semibold text-yellow-900 mb-1">Safe Query Mode</h4>
+                          <p className="text-xs text-yellow-800">Only SELECT queries are allowed for safety. Write operations require explicit confirmation and are disabled by default.</p>
                         </div>
                       </div>
 
-                      <div className="lg:col-span-1">
-                        <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
-                          <h4 className="text-sm font-semibold text-gray-900 mb-3">Query Templates</h4>
-                          <div className="space-y-2">
-                            <button className="w-full text-left px-3 py-2 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded text-xs transition-colors">
-                              <div className="font-medium text-gray-900 mb-1">Select All Users</div>
-                              <div className="text-gray-600">SELECT * FROM users</div>
-                            </button>
-                            <button className="w-full text-left px-3 py-2 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded text-xs transition-colors">
-                              <div className="font-medium text-gray-900 mb-1">Active Users Count</div>
-                              <div className="text-gray-600">SELECT COUNT(*) FROM users WHERE status='active'</div>
-                            </button>
-                            <button className="w-full text-left px-3 py-2 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded text-xs transition-colors">
-                              <div className="font-medium text-gray-900 mb-1">Recent Orders</div>
-                              <div className="text-gray-600">SELECT * FROM orders ORDER BY created_at DESC LIMIT 50</div>
-                            </button>
-                            <button className="w-full text-left px-3 py-2 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded text-xs transition-colors">
-                              <div className="font-medium text-gray-900 mb-1">Products by Category</div>
-                              <div className="text-gray-600">SELECT p.*, c.name FROM products p JOIN categories c</div>
-                            </button>
-                            <button className="w-full text-left px-3 py-2 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded text-xs transition-colors">
-                              <div className="font-medium text-gray-900 mb-1">User Registration Stats</div>
-                              <div className="text-gray-600">SELECT DATE(created_at), COUNT(*) FROM users GROUP BY DATE(created_at)</div>
-                            </button>
+                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div className="lg:col-span-2">
+                          <div className="mb-4">
+                            <label className="block text-sm font-semibold text-gray-900 mb-2">SQL Query</label>
+                            <textarea
+                              className="w-full h-64 px-4 py-3 border border-gray-300 rounded-lg text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                              placeholder="Enter your SQL query here..."
+                              value={sqlQuery}
+                              onChange={(e) => setSqlQuery(e.target.value)}
+                            />
+                          </div>
+
+                          <div className="flex items-center justify-between mb-6">
+                            <div className="flex items-center space-x-2">
+                              <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg flex items-center space-x-2">
+                                <FontAwesomeIcon icon={faPlay} />
+                                <span>Run Query</span>
+                              </button>
+                              <button className="px-4 py-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium rounded-lg flex items-center space-x-2">
+                                <FontAwesomeIcon icon={faEraser} />
+                                <span>Clear</span>
+                              </button>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <button className="px-4 py-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium rounded-lg flex items-center space-x-2">
+                                <FontAwesomeIcon icon={faDownload} />
+                                <span>Export Results</span>
+                              </button>
+                            </div>
+                          </div>
+
+                          <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                            <div className="px-4 py-3 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
+                              <h4 className="text-sm font-semibold text-gray-900">Query Results</h4>
+                              <span className="text-xs text-gray-600">25 rows returned in 0.043s</span>
+                            </div>
+                            <div className="overflow-x-auto">
+                              <table className="w-full text-sm">
+                                <thead className="bg-gray-50 border-b border-gray-200">
+                                  <tr>
+                                    <th className="px-4 py-3 text-left font-semibold text-gray-700">id</th>
+                                    <th className="px-4 py-3 text-left font-semibold text-gray-700">username</th>
+                                    <th className="px-4 py-3 text-left font-semibold text-gray-700">email</th>
+                                    <th className="px-4 py-3 text-left font-semibold text-gray-700">first_name</th>
+                                    <th className="px-4 py-3 text-left font-semibold text-gray-700">last_name</th>
+                                    <th className="px-4 py-3 text-left font-semibold text-gray-700">status</th>
+                                    <th className="px-4 py-3 text-left font-semibold text-gray-700">created_at</th>
+                                  </tr>
+                                </thead>
+                                <tbody className="divide-y divide-gray-200">
+                                  <tr className="hover:bg-gray-50">
+                                    <td className="px-4 py-3 text-gray-900">1247</td>
+                                    <td className="px-4 py-3 text-gray-900">alex_turner</td>
+                                    <td className="px-4 py-3 text-gray-600">alex.turner@example.com</td>
+                                    <td className="px-4 py-3 text-gray-600">Alex</td>
+                                    <td className="px-4 py-3 text-gray-600">Turner</td>
+                                    <td className="px-4 py-3"><span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">active</span></td>
+                                    <td className="px-4 py-3 text-gray-600">2024-03-15 18:42:33</td>
+                                  </tr>
+                                  <tr className="hover:bg-gray-50">
+                                    <td className="px-4 py-3 text-gray-900">1246</td>
+                                    <td className="px-4 py-3 text-gray-900">jessica_lee</td>
+                                    <td className="px-4 py-3 text-gray-600">jessica.lee@example.com</td>
+                                    <td className="px-4 py-3 text-gray-600">Jessica</td>
+                                    <td className="px-4 py-3 text-gray-600">Lee</td>
+                                    <td className="px-4 py-3"><span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">active</span></td>
+                                    <td className="px-4 py-3 text-gray-600">2024-03-15 17:28:19</td>
+                                  </tr>
+                                  <tr className="hover:bg-gray-50">
+                                    <td className="px-4 py-3 text-gray-900">1245</td>
+                                    <td className="px-4 py-3 text-gray-900">chris_evans</td>
+                                    <td className="px-4 py-3 text-gray-600">c.evans@example.com</td>
+                                    <td className="px-4 py-3 text-gray-600">Christopher</td>
+                                    <td className="px-4 py-3 text-gray-600">Evans</td>
+                                    <td className="px-4 py-3"><span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">active</span></td>
+                                    <td className="px-4 py-3 text-gray-600">2024-03-15 16:15:47</td>
+                                  </tr>
+                                  <tr className="hover:bg-gray-50">
+                                    <td className="px-4 py-3 text-gray-900">1244</td>
+                                    <td className="px-4 py-3 text-gray-900">amanda_white</td>
+                                    <td className="px-4 py-3 text-gray-600">amanda.w@example.com</td>
+                                    <td className="px-4 py-3 text-gray-600">Amanda</td>
+                                    <td className="px-4 py-3 text-gray-600">White</td>
+                                    <td className="px-4 py-3"><span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">active</span></td>
+                                    <td className="px-4 py-3 text-gray-600">2024-03-15 14:52:08</td>
+                                  </tr>
+                                  <tr className="hover:bg-gray-50">
+                                    <td className="px-4 py-3 text-gray-900">1243</td>
+                                    <td className="px-4 py-3 text-gray-900">kevin_harris</td>
+                                    <td className="px-4 py-3 text-gray-600">kevin.harris@example.com</td>
+                                    <td className="px-4 py-3 text-gray-600">Kevin</td>
+                                    <td className="px-4 py-3 text-gray-600">Harris</td>
+                                    <td className="px-4 py-3"><span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">active</span></td>
+                                    <td className="px-4 py-3 text-gray-600">2024-03-15 13:38:22</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
                           </div>
                         </div>
 
-                        <div className="bg-blue-50 rounded-lg border border-blue-200 p-4">
-                          <h4 className="text-sm font-semibold text-blue-900 mb-2 flex items-center">
-                            <FontAwesomeIcon icon={faLightbulb} className="mr-2" />
-                            Query Tips
-                          </h4>
-                          <ul className="space-y-2 text-xs text-blue-800">
-                            <li className="flex items-start">
-                              <FontAwesomeIcon icon={faCheck} className="text-blue-600 mr-2 mt-0.5" />
-                              <span>Use LIMIT to prevent large result sets</span>
-                            </li>
-                            <li className="flex items-start">
-                              <FontAwesomeIcon icon={faCheck} className="text-blue-600 mr-2 mt-0.5" />
-                              <span>Add WHERE clauses for specific filtering</span>
-                            </li>
-                            <li className="flex items-start">
-                              <FontAwesomeIcon icon={faCheck} className="text-blue-600 mr-2 mt-0.5" />
-                              <span>Use ORDER BY for sorted results</span>
-                            </li>
-                            <li className="flex items-start">
-                              <FontAwesomeIcon icon={faCheck} className="text-blue-600 mr-2 mt-0.5" />
-                              <span>JOIN tables to combine related data</span>
-                            </li>
-                            <li className="flex items-start">
-                              <FontAwesomeIcon icon={faCheck} className="text-blue-600 mr-2 mt-0.5" />
-                              <span>Use COUNT, SUM, AVG for aggregations</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </section>
+                        <div className="lg:col-span-1">
+                          <div className="bg-white rounded-lg border border-gray-200 p-4 mb-4">
+                            <h4 className="text-sm font-semibold text-gray-900 mb-3">Query Templates</h4>
+                            <div className="space-y-2">
+                              <button className="w-full text-left px-3 py-2 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded text-xs transition-colors">
+                                <div className="font-medium text-gray-900 mb-1">Select All Users</div>
+                                <div className="text-gray-600">SELECT * FROM users</div>
+                              </button>
+                              <button className="w-full text-left px-3 py-2 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded text-xs transition-colors">
+                                <div className="font-medium text-gray-900 mb-1">Active Users Count</div>
+                                <div className="text-gray-600">SELECT COUNT(*) FROM users WHERE status='active'</div>
+                              </button>
+                              <button className="w-full text-left px-3 py-2 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded text-xs transition-colors">
+                                <div className="font-medium text-gray-900 mb-1">Recent Orders</div>
+                                <div className="text-gray-600">SELECT * FROM orders ORDER BY created_at DESC LIMIT 50</div>
+                              </button>
+                              <button className="w-full text-left px-3 py-2 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded text-xs transition-colors">
+                                <div className="font-medium text-gray-900 mb-1">Products by Category</div>
+                                <div className="text-gray-600">SELECT p.*, c.name FROM products p JOIN categories c</div>
+                              </button>
+                              <button className="w-full text-left px-3 py-2 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded text-xs transition-colors">
+                                <div className="font-medium text-gray-900 mb-1">User Registration Stats</div>
+                                <div className="text-gray-600">SELECT DATE(created_at), COUNT(*) FROM users GROUP BY DATE(created_at)</div>
+                              </button>
+                            </div>
+                          </div>
 
-            {/* Query History */}
-            <section className="mt-8">
-              <div className="bg-white rounded-xl border border-gray-200 p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900">Recent Query History</h3>
-                  <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">Clear History</button>
-                </div>
-                <div className="space-y-3">
-                  <div className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors cursor-pointer">
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex items-center space-x-2">
-                        <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">Success</span>
-                        <span className="text-xs text-gray-600">2 minutes ago</span>
+                          <div className="bg-blue-50 rounded-lg border border-blue-200 p-4">
+                            <h4 className="text-sm font-semibold text-blue-900 mb-2 flex items-center">
+                              <FontAwesomeIcon icon={faLightbulb} className="mr-2" />
+                              Query Tips
+                            </h4>
+                            <ul className="space-y-2 text-xs text-blue-800">
+                              <li className="flex items-start">
+                                <FontAwesomeIcon icon={faCheck} className="text-blue-600 mr-2 mt-0.5" />
+                                <span>Use LIMIT to prevent large result sets</span>
+                              </li>
+                              <li className="flex items-start">
+                                <FontAwesomeIcon icon={faCheck} className="text-blue-600 mr-2 mt-0.5" />
+                                <span>Add WHERE clauses for specific filtering</span>
+                              </li>
+                              <li className="flex items-start">
+                                <FontAwesomeIcon icon={faCheck} className="text-blue-600 mr-2 mt-0.5" />
+                                <span>Use ORDER BY for sorted results</span>
+                              </li>
+                              <li className="flex items-start">
+                                <FontAwesomeIcon icon={faCheck} className="text-blue-600 mr-2 mt-0.5" />
+                                <span>JOIN tables to combine related data</span>
+                              </li>
+                              <li className="flex items-start">
+                                <FontAwesomeIcon icon={faCheck} className="text-blue-600 mr-2 mt-0.5" />
+                                <span>Use COUNT, SUM, AVG for aggregations</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
-                      <button className="text-gray-400 hover:text-blue-600">
-                        <FontAwesomeIcon icon={faCopy} />
-                      </button>
-                    </div>
-                    <code className="text-xs text-gray-700 font-mono block bg-gray-50 p-2 rounded">SELECT id, username, email FROM users WHERE status = 'active' ORDER BY created_at DESC LIMIT 25</code>
-                    <div className="mt-2 text-xs text-gray-600">25 rows returned in 0.043s</div>
-                  </div>
-                  <div className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors cursor-pointer">
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex items-center space-x-2">
-                        <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">Success</span>
-                        <span className="text-xs text-gray-600">15 minutes ago</span>
-                      </div>
-                      <button className="text-gray-400 hover:text-blue-600">
-                        <FontAwesomeIcon icon={faCopy} />
-                      </button>
-                    </div>
-                    <code className="text-xs text-gray-700 font-mono block bg-gray-50 p-2 rounded">SELECT COUNT(*) as total_orders, SUM(total_amount) as revenue FROM orders WHERE status = 'completed'</code>
-                    <div className="mt-2 text-xs text-gray-600">1 row returned in 0.028s</div>
-                  </div>
-                  <div className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors cursor-pointer">
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex items-center space-x-2">
-                        <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">Success</span>
-                        <span className="text-xs text-gray-600">1 hour ago</span>
-                      </div>
-                      <button className="text-gray-400 hover:text-blue-600">
-                        <FontAwesomeIcon icon={faCopy} />
-                      </button>
-                    </div>
-                    <code className="text-xs text-gray-700 font-mono block bg-gray-50 p-2 rounded">SELECT p.name, p.price, c.name as category FROM products p JOIN categories c ON p.category_id = c.id LIMIT 50</code>
-                    <div className="mt-2 text-xs text-gray-600">50 rows returned in 0.067s</div>
-                  </div>
-                  <div className="border border-red-200 rounded-lg p-4 bg-red-50 cursor-pointer">
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex items-center space-x-2">
-                        <span className="px-2 py-1 bg-red-100 text-red-700 text-xs font-medium rounded">Error</span>
-                        <span className="text-xs text-gray-600">2 hours ago</span>
-                      </div>
-                      <button className="text-gray-400 hover:text-blue-600">
-                        <FontAwesomeIcon icon={faCopy} />
-                      </button>
-                    </div>
-                    <code className="text-xs text-gray-700 font-mono block bg-white p-2 rounded">DELETE FROM users WHERE id = 123</code>
-                    <div className="mt-2 text-xs text-red-700 flex items-start">
-                      <FontAwesomeIcon icon={faTriangleExclamation} className="mr-2 mt-0.5" />
-                      <span>Query failed: DELETE operations are not allowed in safe mode</span>
                     </div>
                   </div>
-                </div>
-              </div>
-            </section>
+                )}
+              </section>
 
-            {/* Database Tools */}
-            <section className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="bg-white rounded-xl border border-gray-200 p-6">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <FontAwesomeIcon icon={faShieldHalved} className="text-blue-600 text-xl" />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Database Backup</h3>
-                <p className="text-sm text-gray-600 mb-4">Create a full backup of your database for disaster recovery</p>
-                <button className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg">
-                  Create Backup
-                </button>
-              </div>
-              <div className="bg-white rounded-xl border border-gray-200 p-6">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                  <FontAwesomeIcon icon={faDownload} className="text-green-600 text-xl" />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Export Data</h3>
-                <p className="text-sm text-gray-600 mb-4">Export database tables to CSV, JSON, or SQL format</p>
-                <button className="w-full px-4 py-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 text-sm font-medium rounded-lg">
-                  Export Database
-                </button>
-              </div>
-              <div className="bg-white rounded-xl border border-gray-200 p-6">
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                  <FontAwesomeIcon icon={faChartLine} className="text-purple-600 text-xl" />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Optimize Tables</h3>
-                <p className="text-sm text-gray-600 mb-4">Analyze and optimize database tables for better performance</p>
-                <button className="w-full px-4 py-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 text-sm font-medium rounded-lg">
-                  Run Optimization
-                </button>
-              </div>
-            </section>
-
-            {/* Database Security */}
-            <section className="mt-8">
-              <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border border-yellow-200 p-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <FontAwesomeIcon icon={faLock} className="text-yellow-600 text-xl" />
+              {/* Query History */}
+              <section className="mt-8">
+                <div className="bg-white rounded-xl border border-gray-200 p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-semibold text-gray-900">Recent Query History</h3>
+                    <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">Clear History</button>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Database Security & Access Control</h3>
-                    <p className="text-sm text-gray-700 mb-4">Your database is protected with multiple security layers. Only read operations are allowed through the web interface by default.</p>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div className="bg-white rounded-lg p-4 border border-yellow-200">
-                        <div className="flex items-center space-x-2 mb-2">
-                          <FontAwesomeIcon icon={faCheckCircle} className="text-green-600" />
-                          <span className="text-sm font-semibold text-gray-900">SSL Encrypted</span>
+                  <div className="space-y-3">
+                    <div className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors cursor-pointer">
+                      <div className="flex items-start justify-between mb-2">
+                        <div className="flex items-center space-x-2">
+                          <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">Success</span>
+                          <span className="text-xs text-gray-600">2 minutes ago</span>
                         </div>
-                        <p className="text-xs text-gray-600">All database connections use SSL/TLS encryption</p>
+                        <button className="text-gray-400 hover:text-blue-600">
+                          <FontAwesomeIcon icon={faCopy} />
+                        </button>
                       </div>
-                      <div className="bg-white rounded-lg p-4 border border-yellow-200">
-                        <div className="flex items-center space-x-2 mb-2">
-                          <FontAwesomeIcon icon={faCheckCircle} className="text-green-600" />
-                          <span className="text-sm font-semibold text-gray-900">Read-Only Access</span>
+                      <code className="text-xs text-gray-700 font-mono block bg-gray-50 p-2 rounded">SELECT id, username, email FROM users WHERE status = 'active' ORDER BY created_at DESC LIMIT 25</code>
+                      <div className="mt-2 text-xs text-gray-600">25 rows returned in 0.043s</div>
+                    </div>
+                    <div className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors cursor-pointer">
+                      <div className="flex items-start justify-between mb-2">
+                        <div className="flex items-center space-x-2">
+                          <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">Success</span>
+                          <span className="text-xs text-gray-600">15 minutes ago</span>
                         </div>
-                        <p className="text-xs text-gray-600">Web interface limited to SELECT queries only</p>
+                        <button className="text-gray-400 hover:text-blue-600">
+                          <FontAwesomeIcon icon={faCopy} />
+                        </button>
                       </div>
-                      <div className="bg-white rounded-lg p-4 border border-yellow-200">
-                        <div className="flex items-center space-x-2 mb-2">
-                          <FontAwesomeIcon icon={faCheckCircle} className="text-green-600" />
-                          <span className="text-sm font-semibold text-gray-900">Auto Backups</span>
+                      <code className="text-xs text-gray-700 font-mono block bg-gray-50 p-2 rounded">SELECT COUNT(*) as total_orders, SUM(total_amount) as revenue FROM orders WHERE status = 'completed'</code>
+                      <div className="mt-2 text-xs text-gray-600">1 row returned in 0.028s</div>
+                    </div>
+                    <div className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors cursor-pointer">
+                      <div className="flex items-start justify-between mb-2">
+                        <div className="flex items-center space-x-2">
+                          <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded">Success</span>
+                          <span className="text-xs text-gray-600">1 hour ago</span>
                         </div>
-                        <p className="text-xs text-gray-600">Daily automated backups with 30-day retention</p>
+                        <button className="text-gray-400 hover:text-blue-600">
+                          <FontAwesomeIcon icon={faCopy} />
+                        </button>
+                      </div>
+                      <code className="text-xs text-gray-700 font-mono block bg-gray-50 p-2 rounded">SELECT p.name, p.price, c.name as category FROM products p JOIN categories c ON p.category_id = c.id LIMIT 50</code>
+                      <div className="mt-2 text-xs text-gray-600">50 rows returned in 0.067s</div>
+                    </div>
+                    <div className="border border-red-200 rounded-lg p-4 bg-red-50 cursor-pointer">
+                      <div className="flex items-start justify-between mb-2">
+                        <div className="flex items-center space-x-2">
+                          <span className="px-2 py-1 bg-red-100 text-red-700 text-xs font-medium rounded">Error</span>
+                          <span className="text-xs text-gray-600">2 hours ago</span>
+                        </div>
+                        <button className="text-gray-400 hover:text-blue-600">
+                          <FontAwesomeIcon icon={faCopy} />
+                        </button>
+                      </div>
+                      <code className="text-xs text-gray-700 font-mono block bg-white p-2 rounded">DELETE FROM users WHERE id = 123</code>
+                      <div className="mt-2 text-xs text-red-700 flex items-start">
+                        <FontAwesomeIcon icon={faTriangleExclamation} className="mr-2 mt-0.5" />
+                        <span>Query failed: DELETE operations are not allowed in safe mode</span>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </section>
+              </section>
+
+              {/* Database Tools */}
+              <section className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="bg-white rounded-xl border border-gray-200 p-6">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                    <FontAwesomeIcon icon={faShieldHalved} className="text-blue-600 text-xl" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Database Backup</h3>
+                  <p className="text-sm text-gray-600 mb-4">Create a full backup of your database for disaster recovery</p>
+                  <button className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg">
+                    Create Backup
+                  </button>
+                </div>
+                <div className="bg-white rounded-xl border border-gray-200 p-6">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                    <FontAwesomeIcon icon={faDownload} className="text-green-600 text-xl" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Export Data</h3>
+                  <p className="text-sm text-gray-600 mb-4">Export database tables to CSV, JSON, or SQL format</p>
+                  <button className="w-full px-4 py-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 text-sm font-medium rounded-lg">
+                    Export Database
+                  </button>
+                </div>
+                <div className="bg-white rounded-xl border border-gray-200 p-6">
+                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                    <FontAwesomeIcon icon={faChartLine} className="text-purple-600 text-xl" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Optimize Tables</h3>
+                  <p className="text-sm text-gray-600 mb-4">Analyze and optimize database tables for better performance</p>
+                  <button className="w-full px-4 py-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 text-sm font-medium rounded-lg">
+                    Run Optimization
+                  </button>
+                </div>
+              </section>
+
+              {/* Database Security */}
+              <section className="mt-8 mb-8">
+                <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border border-yellow-200 p-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <FontAwesomeIcon icon={faLock} className="text-yellow-600 text-xl" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Database Security & Access Control</h3>
+                      <p className="text-sm text-gray-700 mb-4">Your database is protected with multiple security layers. Only read operations are allowed through the web interface by default.</p>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="bg-white rounded-lg p-4 border border-yellow-200">
+                          <div className="flex items-center space-x-2 mb-2">
+                            <FontAwesomeIcon icon={faCheckCircle} className="text-green-600" />
+                            <span className="text-sm font-semibold text-gray-900">SSL Encrypted</span>
+                          </div>
+                          <p className="text-xs text-gray-600">All database connections use SSL/TLS encryption</p>
+                        </div>
+                        <div className="bg-white rounded-lg p-4 border border-yellow-200">
+                          <div className="flex items-center space-x-2 mb-2">
+                            <FontAwesomeIcon icon={faCheckCircle} className="text-green-600" />
+                            <span className="text-sm font-semibold text-gray-900">Read-Only Access</span>
+                          </div>
+                          <p className="text-xs text-gray-600">Web interface limited to SELECT queries only</p>
+                        </div>
+                        <div className="bg-white rounded-lg p-4 border border-yellow-200">
+                          <div className="flex items-center space-x-2 mb-2">
+                            <FontAwesomeIcon icon={faCheckCircle} className="text-green-600" />
+                            <span className="text-sm font-semibold text-gray-900">Auto Backups</span>
+                          </div>
+                          <p className="text-xs text-gray-600">Daily automated backups with 30-day retention</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
           </section>
         </main>
       </div>
