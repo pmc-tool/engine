@@ -294,28 +294,29 @@ export default function Sidebar() {
           </Link>
         </div>
 
-        {/* Current Plan Card */}
-        <div className="mx-3 mb-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
-              <FontAwesomeIcon icon={faCheckCircle} className="text-white text-sm" />
+        {/* Plan Card */}
+        <div className="mx-3 mb-4 bg-white rounded-xl overflow-hidden border border-slate-200">
+          {/* Current Plan Section */}
+          <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+                <FontAwesomeIcon icon={faCheckCircle} className="text-white text-sm" />
+              </div>
+              <div>
+                <p className="text-white text-xs font-medium">Current Plan</p>
+                <p className="text-white text-lg font-bold">Pro Plan</p>
+              </div>
             </div>
-            <div>
-              <p className="text-white text-xs font-medium">Current Plan</p>
-              <p className="text-white text-lg font-bold">Pro Plan</p>
+            <div className="flex items-center justify-between text-white text-xs mt-3 pt-3 border-t border-white/20">
+              <span>3 Sites Active</span>
+              <span>127 Connects</span>
             </div>
           </div>
-          <div className="flex items-center justify-between text-white text-xs mt-3 pt-3 border-t border-white/20">
-            <span>3 Sites Active</span>
-            <span>127 Connects</span>
-          </div>
-        </div>
 
-        {/* Upgrade Plan Card */}
-        <div className="mx-3 mb-4">
+          {/* Upgrade Section */}
           <Link
             href="/billing"
-            className="block bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl p-4 hover:from-purple-700 hover:to-pink-700 transition-all group"
+            className="block bg-gradient-to-br from-purple-600 to-pink-600 p-4 hover:from-purple-700 hover:to-pink-700 transition-all group"
           >
             <div className="flex items-center gap-2 mb-2">
               <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
