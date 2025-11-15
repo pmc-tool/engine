@@ -25,8 +25,15 @@ import {
   faFileLines,
   faLayerGroup,
   faBook,
-  faArrowUpRightFromSquare
+  faArrowUpRightFromSquare,
+  faCode
 } from '@fortawesome/free-solid-svg-icons';
+import {
+  faReact,
+  faWordpress,
+  faVuejs,
+  faAngular
+} from '@fortawesome/free-brands-svg-icons';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -38,7 +45,7 @@ const siteData = [
     pmcDomain: 'techflow.pmc.io',
     status: 'live',
     plan: 'Pro',
-    language: 'EN',
+    tech: 'React',
     bandwidth: { used: 42.3, total: 100, percent: 42 },
     storage: { used: 1.8, total: 5, percent: 36 },
     connectsUsed: 42,
@@ -53,7 +60,7 @@ const siteData = [
     pmcDomain: 'stylehub.pmc.io',
     status: 'live',
     plan: 'Scale',
-    language: 'EN',
+    tech: 'WordPress',
     bandwidth: { used: 78.5, total: 500, percent: 16 },
     storage: { used: 8.2, total: 50, percent: 16 },
     connectsUsed: 156,
@@ -68,7 +75,7 @@ const siteData = [
     pmcDomain: 'creative.pmc.io',
     status: 'live',
     plan: 'Pro',
-    language: 'EN',
+    tech: 'Next.js',
     bandwidth: { used: 23.1, total: 100, percent: 23 },
     storage: { used: 2.4, total: 5, percent: 48 },
     connectsUsed: 67,
@@ -83,7 +90,7 @@ const siteData = [
     pmcDomain: 'greenearth.pmc.io',
     status: 'deploying',
     plan: 'Starter',
-    language: 'EN',
+    tech: 'Vue.js',
     bandwidth: { used: 5.2, total: 50, percent: 10 },
     storage: { used: 0.8, total: 2, percent: 40 },
     connectsUsed: 18,
@@ -98,7 +105,7 @@ const siteData = [
     pmcDomain: 'urbaneats.pmc.io',
     status: 'live',
     plan: 'Pro',
-    language: 'EN',
+    tech: 'Angular',
     bandwidth: { used: 56.8, total: 100, percent: 57 },
     storage: { used: 3.2, total: 5, percent: 64 },
     connectsUsed: 89,
@@ -113,7 +120,7 @@ const siteData = [
     pmcDomain: 'learnhub.pmc.io',
     status: 'live',
     plan: 'Scale',
-    language: 'EN',
+    tech: 'Svelte',
     bandwidth: { used: 124.6, total: 500, percent: 25 },
     storage: { used: 12.5, total: 50, percent: 25 },
     connectsUsed: 203,
@@ -175,6 +182,24 @@ export default function HomePage() {
       'Scale': 'bg-indigo-600'
     };
     return <span className={`px-2 py-1 ${colors[plan] || 'bg-gray-600'} text-white text-xs font-medium rounded-full`}>{plan}</span>;
+  };
+
+  const getTechIcon = (tech: string) => {
+    const techConfig: { [key: string]: { icon: any; color: string } } = {
+      'React': { icon: faReact, color: 'text-blue-500' },
+      'WordPress': { icon: faWordpress, color: 'text-blue-600' },
+      'Next.js': { icon: faCode, color: 'text-slate-900' },
+      'Vue.js': { icon: faVuejs, color: 'text-green-600' },
+      'Angular': { icon: faAngular, color: 'text-red-600' },
+      'Svelte': { icon: faCode, color: 'text-orange-600' }
+    };
+    const config = techConfig[tech] || { icon: faCode, color: 'text-slate-600' };
+    return (
+      <span className="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded flex items-center whitespace-nowrap">
+        <FontAwesomeIcon icon={config.icon} className={`mr-1 ${config.color}`} />
+        {tech}
+      </span>
+    );
   };
 
   return (
@@ -390,9 +415,9 @@ export default function HomePage() {
             {/* Sites Grid/List */}
             <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}>
               {filteredSites.map((site) => (
-                <article key={site.id} className={`bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-2xl hover:border-pmc-red/30 transition-all duration-300 ${viewMode === 'grid' ? 'transform hover:-translate-y-1' : ''} group ${viewMode === 'list' ? 'flex flex-col md:flex-row' : ''}`}>
+                <article key={site.id} className={`bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-2xl hover:border-pmc-red/30 transition-all duration-300 ${viewMode === 'grid' ? 'transform hover:-translate-y-1' : ''} group ${viewMode === 'list' ? 'flex flex-col sm:flex-row' : ''}`}>
                   {/* Site Thumbnail */}
-                  <div className={`relative bg-gradient-to-br ${site.gradient} overflow-hidden ${viewMode === 'grid' ? 'h-48' : 'h-48 md:h-auto md:w-64 flex-shrink-0'}`}>
+                  <div className={`relative bg-gradient-to-br ${site.gradient} overflow-hidden ${viewMode === 'grid' ? 'h-48' : 'h-48 sm:h-auto sm:w-48 lg:w-64 flex-shrink-0'}`}>
                     <Image
                       src={site.image}
                       alt={site.name}
@@ -401,34 +426,31 @@ export default function HomePage() {
                       unoptimized
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute top-3 right-3 flex space-x-2">
+                    <div className={`absolute flex space-x-2 ${viewMode === 'grid' ? 'top-3 right-3' : 'top-3 left-3'}`}>
                       {getStatusBadge(site.status)}
                       {getPlanBadge(site.plan)}
                     </div>
                   </div>
 
                   {/* Site Info */}
-                  <div className={`p-5 ${viewMode === 'list' ? 'flex-1 flex flex-col md:flex-row md:items-center md:justify-between gap-4' : ''}`}>
-                    <div className={`${viewMode === 'grid' ? 'mb-3' : 'flex-1'}`}>
+                  <div className={`p-5 flex-1 ${viewMode === 'list' ? 'flex flex-col justify-between' : ''}`}>
+                    {/* Header Section */}
+                    <div className={`${viewMode === 'list' ? 'mb-4' : 'mb-3'}`}>
                       <h3 className="text-lg font-bold text-slate-900 mb-1">{site.name}</h3>
-                      <div className="flex items-center space-x-2 text-sm text-slate-600">
+                      <div className="flex items-center space-x-2 text-sm text-slate-600 mb-2">
                         <FontAwesomeIcon icon={faLink} className="text-xs" />
                         <span className="text-blue-600">{site.customDomain}</span>
                       </div>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="px-2 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded whitespace-nowrap">
+                          {site.pmcDomain}
+                        </span>
+                        {getTechIcon(site.tech)}
+                      </div>
                     </div>
 
-                    <div className="flex items-center space-x-2 mb-4">
-                      <span className="px-2 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded">
-                        {site.pmcDomain}
-                      </span>
-                      <span className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded flex items-center">
-                        <FontAwesomeIcon icon={faLanguage} className="mr-1" />
-                        {site.language}
-                      </span>
-                    </div>
-
-                    {/* Progress Bars */}
-                    <div className="space-y-3 mb-4">
+                    {/* Progress Bars - Only in Grid View */}
+                    <div className={`space-y-3 mb-4 ${viewMode === 'list' ? 'hidden' : ''}`}>
                       <div>
                         <div className="flex items-center justify-between text-xs text-slate-600 mb-1">
                           <span className="flex items-center">
@@ -463,7 +485,7 @@ export default function HomePage() {
                     </div>
 
                     {/* Connects Info */}
-                    <div className="bg-gradient-to-r from-slate-50 to-pink-50/30 group-hover:from-pink-50 group-hover:to-pmc-red/5 rounded-lg p-3 mb-4 border border-transparent group-hover:border-pmc-red/20 transition-all duration-300">
+                    <div className={`bg-gradient-to-r from-slate-50 to-pink-50/30 group-hover:from-pink-50 group-hover:to-pmc-red/5 rounded-lg p-3 mb-4 border border-transparent group-hover:border-pmc-red/20 transition-all duration-300 ${viewMode === 'list' ? 'hidden' : ''}`}>
                       <div className="flex items-center justify-between text-xs">
                         <span className="text-slate-600">
                           Connects used: <span className="font-bold text-pmc-red group-hover:scale-110 inline-block transition-transform">{site.connectsUsed}</span>
@@ -475,57 +497,58 @@ export default function HomePage() {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className={`${viewMode === 'list' ? 'flex-shrink-0 md:w-auto' : ''}`}>
-                    <div className={`grid ${viewMode === 'list' ? 'grid-cols-2 md:grid-cols-4' : 'grid-cols-2'} gap-2 mb-3`}>
-                      <Link
-                        href={`/sites/${site.id}/overview`}
-                        className="px-3 py-2 bg-gradient-to-r from-pmc-red to-pink-600 hover:from-pmc-red-dark hover:to-pink-700 text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1 shadow-md hover:shadow-lg transition-all transform hover:scale-105"
-                      >
-                        <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-                        <span>Open Manager</span>
-                      </Link>
-                      <Link
-                        href={`/sites/${site.id}/ai-assistant`}
-                        className="px-3 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1 shadow-md hover:shadow-lg transition-all transform hover:scale-105"
-                      >
-                        <FontAwesomeIcon icon={faWandMagicSparkles} />
-                        <span>AI Re-customize</span>
-                      </Link>
-                    </div>
+                    <div className={`${viewMode === 'list' ? 'mt-auto' : ''}`}>
+                      <div className={`grid ${viewMode === 'list' ? 'grid-cols-2 lg:grid-cols-4' : 'grid-cols-2'} gap-2`}>
+                        <Link
+                          href={`/sites/${site.id}/overview`}
+                          className="px-3 py-2 bg-gradient-to-r from-pmc-red to-pink-600 hover:from-pmc-red-dark hover:to-pink-700 text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1 shadow-md hover:shadow-lg transition-all transform hover:scale-105"
+                        >
+                          <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+                          <span className={`${viewMode === 'list' ? 'hidden lg:inline' : ''}`}>Open Manager</span>
+                          <span className={`${viewMode === 'list' ? 'lg:hidden' : 'hidden'}`}>Open</span>
+                        </Link>
+                        <Link
+                          href={`/sites/${site.id}/ai-assistant`}
+                          className="px-3 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1 shadow-md hover:shadow-lg transition-all transform hover:scale-105"
+                        >
+                          <FontAwesomeIcon icon={faWandMagicSparkles} />
+                          <span className={`${viewMode === 'list' ? 'hidden lg:inline' : ''}`}>AI Re-customize</span>
+                          <span className={`${viewMode === 'list' ? 'lg:hidden' : 'hidden'}`}>AI</span>
+                        </Link>
+                        <Link
+                          href={`/sites/${site.id}/content-editor`}
+                          className="px-3 py-2 border-2 border-pmc-red hover:bg-pmc-red text-pmc-red hover:text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1 transition-all transform hover:scale-105"
+                        >
+                          <FontAwesomeIcon icon={faPencil} />
+                          <span className={`${viewMode === 'list' ? 'hidden lg:inline' : ''}`}>Edit Content</span>
+                          <span className={`${viewMode === 'list' ? 'lg:hidden' : 'hidden'}`}>Edit</span>
+                        </Link>
+                        <Link
+                          href={`/domains`}
+                          className="px-3 py-2 border-2 border-slate-300 hover:border-pmc-red hover:bg-pmc-red/10 text-slate-700 hover:text-pmc-red text-xs font-medium rounded-lg flex items-center justify-center space-x-1 transition-all transform hover:scale-105"
+                        >
+                          <FontAwesomeIcon icon={faGlobe} />
+                          <span className={`${viewMode === 'list' ? 'hidden lg:inline' : ''}`}>Manage Domain</span>
+                          <span className={`${viewMode === 'list' ? 'lg:hidden' : 'hidden'}`}>Domain</span>
+                        </Link>
+                      </div>
 
-                    <div className={`grid ${viewMode === 'list' ? 'grid-cols-2 md:grid-cols-4' : 'grid-cols-2'} gap-2 ${viewMode === 'list' ? '' : 'mb-3'}`}>
-                      <Link
-                        href={`/sites/${site.id}/content-editor`}
-                        className="px-3 py-2 border-2 border-pmc-red hover:bg-pmc-red text-pmc-red hover:text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1 transition-all transform hover:scale-105"
-                      >
-                        <FontAwesomeIcon icon={faPencil} />
-                        <span>Edit Content</span>
-                      </Link>
-                      <Link
-                        href={`/domains`}
-                        className="px-3 py-2 border-2 border-slate-300 hover:border-pmc-red hover:bg-pmc-red/10 text-slate-700 hover:text-pmc-red text-xs font-medium rounded-lg flex items-center justify-center space-x-1 transition-all transform hover:scale-105"
-                      >
-                        <FontAwesomeIcon icon={faGlobe} />
-                        <span>Manage Domain</span>
-                      </Link>
-                    </div>
-
-                    {/* Footer */}
-                    <div className={`mt-3 pt-3 ${viewMode === 'grid' ? 'border-t border-slate-200' : ''} flex items-center justify-between`}>
-                      <Link
-                        href="/billing"
-                        className="text-xs text-pmc-red hover:text-pmc-red-dark font-medium transition-colors"
-                      >
-                        Upgrade Plan
-                      </Link>
-                      <Link
-                        href={`/sites/${site.id}/logs`}
-                        className="text-xs text-slate-600 hover:text-pmc-red font-medium flex items-center space-x-1 transition-colors"
-                      >
-                        <FontAwesomeIcon icon={faFileLines} />
-                        <span>View Logs</span>
-                      </Link>
-                    </div>
+                      {/* Footer - Only in Grid View */}
+                      <div className={`mt-3 pt-3 border-t border-slate-200 flex items-center justify-between ${viewMode === 'list' ? 'hidden' : ''}`}>
+                        <Link
+                          href="/billing"
+                          className="text-xs text-pmc-red hover:text-pmc-red-dark font-medium transition-colors"
+                        >
+                          Upgrade Plan
+                        </Link>
+                        <Link
+                          href={`/sites/${site.id}/logs`}
+                          className="text-xs text-slate-600 hover:text-pmc-red font-medium flex items-center space-x-1 transition-colors"
+                        >
+                          <FontAwesomeIcon icon={faFileLines} />
+                          <span>View Logs</span>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </article>

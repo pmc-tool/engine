@@ -50,14 +50,12 @@ export default function Sidebar() {
       {/* Header */}
       <div className="p-6 border-b border-slate-200">
         <div className="flex items-center justify-between mb-1">
-          <Link href="/" className="flex items-center group">
-            <div className="w-10 h-10 bg-gradient-to-br from-pmc-red to-pink-600 rounded-xl flex items-center justify-center mr-3 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all">
-              <FontAwesomeIcon icon={faRocket} className="text-white text-lg" />
-            </div>
-            <div>
-              <h2 className="font-heading font-bold text-slate-900 text-base">PMC Engine</h2>
-              <p className="text-xs text-slate-500 font-medium">inside PackMyCode</p>
-            </div>
+          <Link href="/" className="flex items-center group w-full">
+            <img
+              src="/images/packmycode-logo.png"
+              alt="PackMyCode"
+              className="h-7 w-auto transition-all group-hover:scale-105"
+            />
           </Link>
           <button className="text-slate-400 hover:text-pmc-red transition-colors p-2 hover:bg-slate-50 rounded-lg" aria-label="Collapse sidebar">
             <FontAwesomeIcon icon={faBars} className="text-sm" />
