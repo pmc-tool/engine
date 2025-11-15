@@ -35,7 +35,6 @@ import {
   faAngular
 } from '@fortawesome/free-brands-svg-icons';
 import Link from 'next/link';
-import Image from 'next/image';
 
 const siteData = [
   {
@@ -471,14 +470,11 @@ export default function HomePage() {
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {/* Site Thumbnail */}
-                  <div className={`relative bg-slate-700 overflow-hidden ${viewMode === 'grid' ? 'h-48' : 'h-48 sm:h-auto sm:w-48 lg:w-64 flex-shrink-0'}`}>
-                    <Image
-                      src={site.image}
-                      alt={site.name}
-                      fill
-                      className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
-                      unoptimized
-                    />
+                  <div className={`relative overflow-hidden ${viewMode === 'grid' ? 'h-48' : 'h-48 sm:h-auto sm:w-48 lg:w-64 flex-shrink-0'}`}>
+                    {/* Gradient Placeholder */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${site.gradient} opacity-90 group-hover:opacity-100 transition-opacity duration-500`}>
+                      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzBoLTJWMGgydjMwem0wIDMwaDJWMzBoLTJ2MzB6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-20"></div>
+                    </div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className={`absolute flex space-x-2 ${viewMode === 'grid' ? 'top-3 right-3' : 'top-3 left-3'}`}>
                       {getStatusBadge(site.status)}
