@@ -61,6 +61,144 @@ export default function IntegrationsPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('all');
 
+  // Define integrations with category metadata
+  const integrations = [
+    {
+      name: 'Mailchimp',
+      slug: 'mailchimp',
+      category: 'Marketing',
+      categoryType: 'business',
+      icon: faMailchimp,
+      iconBg: 'bg-yellow-50',
+      iconColor: 'text-yellow-600',
+      description: 'Email marketing and automation platform for subscriber management.',
+    },
+    {
+      name: 'Stripe',
+      slug: 'stripe',
+      category: 'Payments',
+      categoryType: 'business',
+      icon: faStripe,
+      iconBg: 'bg-purple-50',
+      iconColor: 'text-purple-600',
+      description: 'Accept payments, manage subscriptions, and handle transactions securely.',
+    },
+    {
+      name: 'Slack',
+      slug: 'slack',
+      category: 'Communication',
+      categoryType: 'business',
+      icon: faSlack,
+      iconBg: 'bg-purple-50',
+      iconColor: 'text-purple-600',
+      description: 'Get deployment notifications and site alerts directly in Slack channels.',
+    },
+    {
+      name: 'Zapier',
+      slug: 'zapier',
+      category: 'Automation',
+      categoryType: 'business',
+      icon: faBolt,
+      iconBg: 'bg-orange-50',
+      iconColor: 'text-orange-600',
+      description: 'Automate workflows by connecting PMC Engine with 5000+ apps.',
+    },
+    {
+      name: 'GitHub',
+      slug: 'github',
+      category: 'Development',
+      categoryType: 'business',
+      icon: faGithub,
+      iconBg: 'bg-stone-900',
+      iconColor: 'text-white',
+      description: 'Deploy from GitHub repositories with automatic CI/CD workflows.',
+    },
+    {
+      name: 'HubSpot',
+      slug: 'hubspot',
+      category: 'CRM',
+      categoryType: 'business',
+      icon: faHubspot,
+      iconBg: 'bg-orange-50',
+      iconColor: 'text-orange-600',
+      description: 'Sync contacts, track leads, and manage customer relationships.',
+    },
+    {
+      name: 'Shopify',
+      slug: 'shopify',
+      category: 'E-Commerce',
+      categoryType: 'business',
+      icon: faShopify,
+      iconBg: 'bg-green-50',
+      iconColor: 'text-green-600',
+      description: 'Connect your Shopify store for seamless product management.',
+    },
+    {
+      name: 'Intercom',
+      slug: 'intercom',
+      category: 'Support',
+      categoryType: 'business',
+      icon: faIntercom,
+      iconBg: 'bg-blue-50',
+      iconColor: 'text-blue-600',
+      description: 'Add live chat and customer messaging to your sites.',
+    },
+    {
+      name: 'Airtable',
+      slug: 'airtable',
+      category: 'Database',
+      categoryType: 'business',
+      icon: faTable,
+      iconBg: 'bg-red-50',
+      iconColor: 'text-red-600',
+      description: 'Use Airtable as a flexible database for your content management.',
+    },
+    {
+      name: 'SendGrid',
+      slug: 'sendgrid',
+      category: 'Email',
+      categoryType: 'business',
+      icon: faEnvelope,
+      iconBg: 'bg-blue-50',
+      iconColor: 'text-blue-600',
+      description: 'Reliable email delivery service for transactional and marketing emails.',
+    },
+    {
+      name: 'Notion',
+      slug: 'notion',
+      category: 'Productivity',
+      categoryType: 'business',
+      icon: faFileLines,
+      iconBg: 'bg-stone-900',
+      iconColor: 'text-white',
+      description: 'Sync content from Notion databases to your website automatically.',
+    },
+    {
+      name: 'Hotjar',
+      slug: 'hotjar',
+      category: 'Analytics',
+      categoryType: 'analytics',
+      icon: faChartSimple,
+      iconBg: 'bg-red-50',
+      iconColor: 'text-red-600',
+      description: 'Understand user behavior with heatmaps, recordings, and surveys.',
+    },
+  ];
+
+  // Filter integrations based on active tab
+  const getFilteredIntegrations = () => {
+    if (activeTab === 'business') {
+      return integrations.filter(int => int.categoryType === 'business');
+    }
+    if (activeTab === 'analytics') {
+      return integrations.filter(int => int.categoryType === 'analytics');
+    }
+    // For 'all', 'connected', 'wordpress' tabs, show all integrations
+    return integrations;
+  };
+
+  const filteredIntegrations = getFilteredIntegrations();
+
   return (
     <div className="flex h-screen overflow-hidden">
       <Sidebar />
@@ -160,6 +298,7 @@ export default function IntegrationsPage() {
           </section>
 
           {/* WordPress Featured Section */}
+          {(activeTab === 'all' || activeTab === 'wordpress') && (
           <section className="mb-8">
             <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-card p-8 text-white shadow-saas-lg relative overflow-hidden">
               <div className="absolute top-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full -mr-48 -mt-48"></div>
@@ -244,8 +383,10 @@ export default function IntegrationsPage() {
               </div>
             </div>
           </section>
+          )}
 
           {/* Connected Integrations */}
+          {(activeTab === 'all' || activeTab === 'connected') && (
           <section className="mb-8">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-display font-bold text-stone-900">Connected Integrations</h2>
@@ -400,8 +541,10 @@ export default function IntegrationsPage() {
               </div>
             </div>
           </section>
+          )}
 
           {/* Available Integrations */}
+          {activeTab !== 'connected' && (
           <section className="mb-8">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 gap-4">
               <h2 className="text-2xl font-display font-bold text-stone-900">Available Integrations</h2>
@@ -422,199 +565,29 @@ export default function IntegrationsPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {/* Mailchimp */}
-              <div className="bg-white border border-stone-200 rounded-card p-6 shadow-saas hover:shadow-saas-lg transition group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-yellow-50 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faMailchimp} className="text-yellow-600 text-2xl" />
+              {filteredIntegrations.map((integration) => (
+                <Link
+                  key={integration.name}
+                  href={`/integrations/${integration.slug}`}
+                  className="bg-white border border-stone-200 rounded-card p-6 shadow-saas hover:shadow-saas-lg hover:border-slate-300 transition-all group cursor-pointer block"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className={`w-12 h-12 ${integration.iconBg} rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform`}>
+                      <FontAwesomeIcon icon={integration.icon} className={`${integration.iconColor} text-2xl`} />
+                    </div>
+                    <span className="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-medium rounded">{integration.category}</span>
                   </div>
-                  <span className="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-medium rounded">Marketing</span>
-                </div>
-                <h3 className="text-lg font-display font-bold text-stone-900 mb-2">Mailchimp</h3>
-                <p className="text-sm text-stone-600 mb-4">Email marketing and automation platform for subscriber management.</p>
-                <button className="w-full px-4 py-2 bg-stone-100 hover:bg-pmc-red hover:text-white text-stone-700 text-sm font-medium rounded-lg transition">
-                  <FontAwesomeIcon icon={faPlus} className="mr-2" />
-                  Connect
-                </button>
-              </div>
-
-              {/* Stripe */}
-              <div className="bg-white border border-stone-200 rounded-card p-6 shadow-saas hover:shadow-saas-lg transition group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faStripe} className="text-purple-600 text-2xl" />
+                  <h3 className="text-lg font-display font-bold text-stone-900 mb-2 group-hover:text-pmc-red transition-colors">{integration.name}</h3>
+                  <p className="text-sm text-stone-600 mb-4">{integration.description}</p>
+                  <div className="w-full px-4 py-2 bg-stone-100 group-hover:bg-pmc-red group-hover:text-white text-stone-700 text-sm font-medium rounded-lg transition-all text-center">
+                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="mr-2" />
+                    View Details
                   </div>
-                  <span className="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-medium rounded">Payments</span>
-                </div>
-                <h3 className="text-lg font-display font-bold text-stone-900 mb-2">Stripe</h3>
-                <p className="text-sm text-stone-600 mb-4">Accept payments, manage subscriptions, and handle transactions securely.</p>
-                <button className="w-full px-4 py-2 bg-stone-100 hover:bg-pmc-red hover:text-white text-stone-700 text-sm font-medium rounded-lg transition">
-                  <FontAwesomeIcon icon={faPlus} className="mr-2" />
-                  Connect
-                </button>
-              </div>
-
-              {/* Slack */}
-              <div className="bg-white border border-stone-200 rounded-card p-6 shadow-saas hover:shadow-saas-lg transition group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faSlack} className="text-purple-600 text-2xl" />
-                  </div>
-                  <span className="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-medium rounded">Communication</span>
-                </div>
-                <h3 className="text-lg font-display font-bold text-stone-900 mb-2">Slack</h3>
-                <p className="text-sm text-stone-600 mb-4">Get deployment notifications and site alerts directly in Slack channels.</p>
-                <button className="w-full px-4 py-2 bg-stone-100 hover:bg-pmc-red hover:text-white text-stone-700 text-sm font-medium rounded-lg transition">
-                  <FontAwesomeIcon icon={faPlus} className="mr-2" />
-                  Connect
-                </button>
-              </div>
-
-              {/* Zapier */}
-              <div className="bg-white border border-stone-200 rounded-card p-6 shadow-saas hover:shadow-saas-lg transition group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faBolt} className="text-orange-600 text-2xl" />
-                  </div>
-                  <span className="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-medium rounded">Automation</span>
-                </div>
-                <h3 className="text-lg font-display font-bold text-stone-900 mb-2">Zapier</h3>
-                <p className="text-sm text-stone-600 mb-4">Automate workflows by connecting PMC Engine with 5000+ apps.</p>
-                <button className="w-full px-4 py-2 bg-stone-100 hover:bg-pmc-red hover:text-white text-stone-700 text-sm font-medium rounded-lg transition">
-                  <FontAwesomeIcon icon={faPlus} className="mr-2" />
-                  Connect
-                </button>
-              </div>
-
-              {/* GitHub */}
-              <div className="bg-white border border-stone-200 rounded-card p-6 shadow-saas hover:shadow-saas-lg transition group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-stone-900 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faGithub} className="text-white text-2xl" />
-                  </div>
-                  <span className="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-medium rounded">Development</span>
-                </div>
-                <h3 className="text-lg font-display font-bold text-stone-900 mb-2">GitHub</h3>
-                <p className="text-sm text-stone-600 mb-4">Deploy from GitHub repositories with automatic CI/CD workflows.</p>
-                <button className="w-full px-4 py-2 bg-stone-100 hover:bg-pmc-red hover:text-white text-stone-700 text-sm font-medium rounded-lg transition">
-                  <FontAwesomeIcon icon={faPlus} className="mr-2" />
-                  Connect
-                </button>
-              </div>
-
-              {/* HubSpot */}
-              <div className="bg-white border border-stone-200 rounded-card p-6 shadow-saas hover:shadow-saas-lg transition group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faHubspot} className="text-orange-600 text-2xl" />
-                  </div>
-                  <span className="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-medium rounded">CRM</span>
-                </div>
-                <h3 className="text-lg font-display font-bold text-stone-900 mb-2">HubSpot</h3>
-                <p className="text-sm text-stone-600 mb-4">Sync contacts, track leads, and manage customer relationships.</p>
-                <button className="w-full px-4 py-2 bg-stone-100 hover:bg-pmc-red hover:text-white text-stone-700 text-sm font-medium rounded-lg transition">
-                  <FontAwesomeIcon icon={faPlus} className="mr-2" />
-                  Connect
-                </button>
-              </div>
-
-              {/* Shopify */}
-              <div className="bg-white border border-stone-200 rounded-card p-6 shadow-saas hover:shadow-saas-lg transition group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faShopify} className="text-green-600 text-2xl" />
-                  </div>
-                  <span className="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-medium rounded">E-Commerce</span>
-                </div>
-                <h3 className="text-lg font-display font-bold text-stone-900 mb-2">Shopify</h3>
-                <p className="text-sm text-stone-600 mb-4">Connect your Shopify store for seamless product management.</p>
-                <button className="w-full px-4 py-2 bg-stone-100 hover:bg-pmc-red hover:text-white text-stone-700 text-sm font-medium rounded-lg transition">
-                  <FontAwesomeIcon icon={faPlus} className="mr-2" />
-                  Connect
-                </button>
-              </div>
-
-              {/* Intercom */}
-              <div className="bg-white border border-stone-200 rounded-card p-6 shadow-saas hover:shadow-saas-lg transition group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faIntercom} className="text-blue-600 text-2xl" />
-                  </div>
-                  <span className="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-medium rounded">Support</span>
-                </div>
-                <h3 className="text-lg font-display font-bold text-stone-900 mb-2">Intercom</h3>
-                <p className="text-sm text-stone-600 mb-4">Add live chat and customer messaging to your sites.</p>
-                <button className="w-full px-4 py-2 bg-stone-100 hover:bg-pmc-red hover:text-white text-stone-700 text-sm font-medium rounded-lg transition">
-                  <FontAwesomeIcon icon={faPlus} className="mr-2" />
-                  Connect
-                </button>
-              </div>
-
-              {/* Airtable */}
-              <div className="bg-white border border-stone-200 rounded-card p-6 shadow-saas hover:shadow-saas-lg transition group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faTable} className="text-red-600 text-2xl" />
-                  </div>
-                  <span className="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-medium rounded">Database</span>
-                </div>
-                <h3 className="text-lg font-display font-bold text-stone-900 mb-2">Airtable</h3>
-                <p className="text-sm text-stone-600 mb-4">Use Airtable as a flexible database for your content management.</p>
-                <button className="w-full px-4 py-2 bg-stone-100 hover:bg-pmc-red hover:text-white text-stone-700 text-sm font-medium rounded-lg transition">
-                  <FontAwesomeIcon icon={faPlus} className="mr-2" />
-                  Connect
-                </button>
-              </div>
-
-              {/* SendGrid */}
-              <div className="bg-white border border-stone-200 rounded-card p-6 shadow-saas hover:shadow-saas-lg transition group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faEnvelope} className="text-blue-600 text-2xl" />
-                  </div>
-                  <span className="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-medium rounded">Email</span>
-                </div>
-                <h3 className="text-lg font-display font-bold text-stone-900 mb-2">SendGrid</h3>
-                <p className="text-sm text-stone-600 mb-4">Reliable email delivery service for transactional and marketing emails.</p>
-                <button className="w-full px-4 py-2 bg-stone-100 hover:bg-pmc-red hover:text-white text-stone-700 text-sm font-medium rounded-lg transition">
-                  <FontAwesomeIcon icon={faPlus} className="mr-2" />
-                  Connect
-                </button>
-              </div>
-
-              {/* Notion */}
-              <div className="bg-white border border-stone-200 rounded-card p-6 shadow-saas hover:shadow-saas-lg transition group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-stone-900 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faFileLines} className="text-white text-2xl" />
-                  </div>
-                  <span className="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-medium rounded">Productivity</span>
-                </div>
-                <h3 className="text-lg font-display font-bold text-stone-900 mb-2">Notion</h3>
-                <p className="text-sm text-stone-600 mb-4">Sync content from Notion databases to your website automatically.</p>
-                <button className="w-full px-4 py-2 bg-stone-100 hover:bg-pmc-red hover:text-white text-stone-700 text-sm font-medium rounded-lg transition">
-                  <FontAwesomeIcon icon={faPlus} className="mr-2" />
-                  Connect
-                </button>
-              </div>
-
-              {/* Hotjar */}
-              <div className="bg-white border border-stone-200 rounded-card p-6 shadow-saas hover:shadow-saas-lg transition group">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faChartSimple} className="text-red-600 text-2xl" />
-                  </div>
-                  <span className="px-2 py-1 bg-stone-100 text-stone-600 text-xs font-medium rounded">Analytics</span>
-                </div>
-                <h3 className="text-lg font-display font-bold text-stone-900 mb-2">Hotjar</h3>
-                <p className="text-sm text-stone-600 mb-4">Understand user behavior with heatmaps, recordings, and surveys.</p>
-                <button className="w-full px-4 py-2 bg-stone-100 hover:bg-pmc-red hover:text-white text-stone-700 text-sm font-medium rounded-lg transition">
-                  <FontAwesomeIcon icon={faPlus} className="mr-2" />
-                  Connect
-                </button>
-              </div>
+                </Link>
+              ))}
             </div>
           </section>
+          )}
 
           {/* Integration Benefits */}
           <section className="mb-8">
