@@ -225,7 +225,7 @@ export default function HomePage() {
               </div>
               <Link
                 href="/wizard/theme"
-                className="px-6 py-3 bg-slate-900 hover:bg-slate-700 text-white font-medium rounded-lg flex items-center space-x-2 transition-all"
+                className="px-6 py-3 bg-pmc-red hover:bg-pmc-red-dark text-white font-medium rounded-lg flex items-center space-x-2 transition-all shadow-sm"
               >
                 <FontAwesomeIcon icon={faPlus} />
                 <span>New Site</span>
@@ -242,15 +242,15 @@ export default function HomePage() {
                       placeholder="Search sites..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-slate-400 transition-all bg-white"
+                      className="w-full pl-10 pr-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pmc-red focus:border-pmc-red transition-all bg-white"
                     />
                     <FontAwesomeIcon
                       icon={faSearch}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                      className={`absolute left-3 top-1/2 -translate-y-1/2 transition-colors ${searchTerm ? 'text-pmc-red' : 'text-slate-400'}`}
                     />
                     {searchTerm && (
                       <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                        <span className="text-xs font-semibold text-slate-600 bg-slate-100 px-2 py-1 rounded">
+                        <span className="text-xs font-semibold text-pmc-red bg-pmc-red/10 px-2 py-1 rounded">
                           {filteredSites.length} found
                         </span>
                       </div>
@@ -261,14 +261,14 @@ export default function HomePage() {
                       onClick={() => setShowFilterDropdown(!showFilterDropdown)}
                       className={`px-4 py-2.5 border rounded-lg transition-all flex items-center gap-2 font-medium ${
                         statusFilter !== 'all' || planFilter !== 'all'
-                          ? 'border-slate-900 bg-slate-900 text-white'
+                          ? 'border-pmc-red bg-pmc-red text-white'
                           : 'border-slate-300 text-slate-700 hover:bg-slate-50'
                       }`}
                     >
                       <FontAwesomeIcon icon={faFilter} className="text-sm" />
                       <span className="hidden sm:inline">Filter</span>
                       {(statusFilter !== 'all' || planFilter !== 'all') && (
-                        <span className="flex items-center justify-center w-5 h-5 bg-white text-slate-900 text-xs font-bold rounded-full">
+                        <span className="flex items-center justify-center w-5 h-5 bg-white text-pmc-red text-xs font-bold rounded-full">
                           {[statusFilter !== 'all' ? 1 : 0, planFilter !== 'all' ? 1 : 0].reduce((a, b) => a + b)}
                         </span>
                       )}
@@ -311,7 +311,7 @@ export default function HomePage() {
                                     onClick={() => setStatusFilter(status.value as any)}
                                     className={`w-full px-3 py-2 rounded-lg text-left text-sm font-medium transition-all flex items-center gap-2 ${
                                       statusFilter === status.value
-                                        ? 'bg-slate-900 text-white'
+                                        ? 'bg-pmc-red text-white'
                                         : 'bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200'
                                     }`}
                                   >
@@ -342,7 +342,7 @@ export default function HomePage() {
                                     onClick={() => setPlanFilter(plan.value as any)}
                                     className={`w-full px-3 py-2 rounded-lg text-left text-sm font-medium transition-all flex items-center gap-2 ${
                                       planFilter === plan.value
-                                        ? 'bg-slate-900 text-white'
+                                        ? 'bg-pmc-red text-white'
                                         : 'bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200'
                                     }`}
                                   >
@@ -360,7 +360,7 @@ export default function HomePage() {
                           <div className="px-5 py-4 bg-slate-50 border-t border-slate-200">
                             <button
                               onClick={() => setShowFilterDropdown(false)}
-                              className="w-full px-4 py-2.5 bg-slate-900 hover:bg-slate-700 text-white rounded-lg font-medium transition-all"
+                              className="w-full px-4 py-2.5 bg-pmc-red hover:bg-pmc-red-dark text-white rounded-lg font-medium transition-all"
                             >
                               Apply Filters
                             </button>
@@ -553,7 +553,7 @@ export default function HomePage() {
                       <div className={`grid ${viewMode === 'list' ? 'grid-cols-2 lg:grid-cols-4' : 'grid-cols-2'} gap-2.5`}>
                         <Link
                           href={`/sites/${site.id}/overview`}
-                          className="px-3 py-2.5 bg-slate-900 hover:bg-slate-700 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-all"
+                          className="px-3 py-2.5 bg-pmc-red hover:bg-pmc-red-dark text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-all"
                         >
                           <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-sm" />
                           <span className={`${viewMode === 'list' ? 'hidden lg:inline' : ''}`}>Open Manager</span>
