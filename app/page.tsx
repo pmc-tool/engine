@@ -127,16 +127,28 @@ export default function HomePage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+  const [statusFilter, setStatusFilter] = useState<'all' | 'live' | 'deploying'>('all');
+  const [planFilter, setPlanFilter] = useState<'all' | 'Starter' | 'Pro' | 'Scale'>('all');
 
   const totalSites = siteData.length;
   const liveSites = siteData.filter(s => s.status === 'live').length;
   const connectsAvailable = 127;
   const totalVisitors = '1.2M';
 
-  const filteredSites = siteData.filter((site) =>
-    site.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    site.customDomain.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredSites = siteData.filter((site) => {
+    const matchesSearch = site.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      site.customDomain.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = statusFilter === 'all' || site.status === statusFilter;
+    const matchesPlan = planFilter === 'all' || site.plan === planFilter;
+    return matchesSearch && matchesStatus && matchesPlan;
+  });
+
+  const clearFilters = () => {
+    setStatusFilter('all');
+    setPlanFilter('all');
+    setSearchTerm('');
+  };
 
   const getStatusBadge = (status: string) => {
     if (status === 'live') {
@@ -212,10 +224,100 @@ export default function HomePage() {
                       className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
                     />
                   </div>
-                  <button className="px-4 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-50 transition flex items-center space-x-2">
-                    <FontAwesomeIcon icon={faFilter} />
-                    <span className="hidden sm:inline">Filter</span>
-                  </button>
+                  <div className="relative">
+                    <button
+                      onClick={() => setShowFilterDropdown(!showFilterDropdown)}
+                      className={`px-4 py-2 border-2 rounded-lg transition flex items-center space-x-2 ${
+                        statusFilter !== 'all' || planFilter !== 'all'
+                          ? 'border-pmc-red bg-pmc-red/5 text-pmc-red'
+                          : 'border-slate-300 text-slate-700 hover:bg-slate-50'
+                      }`}
+                    >
+                      <FontAwesomeIcon icon={faFilter} />
+                      <span className="hidden sm:inline">Filter</span>
+                      {(statusFilter !== 'all' || planFilter !== 'all') && (
+                        <span className="ml-1 w-2 h-2 bg-pmc-red rounded-full"></span>
+                      )}
+                    </button>
+
+                    {/* Filter Dropdown */}
+                    {showFilterDropdown && (
+                      <>
+                        <div
+                          className="fixed inset-0 z-30"
+                          onClick={() => setShowFilterDropdown(false)}
+                        />
+                        <div className="absolute top-full right-0 mt-2 w-72 bg-white rounded-xl border-2 border-pmc-red/20 shadow-2xl z-40 overflow-hidden">
+                          <div className="px-4 py-3 bg-gradient-to-r from-pmc-red/5 to-pink-50 border-b border-pmc-red/10">
+                            <div className="flex items-center justify-between">
+                              <h3 className="font-semibold text-slate-900">Filters</h3>
+                              <button
+                                onClick={clearFilters}
+                                className="text-xs text-pmc-red hover:text-pmc-red-dark font-medium"
+                              >
+                                Clear all
+                              </button>
+                            </div>
+                          </div>
+
+                          <div className="p-4 space-y-4">
+                            {/* Status Filter */}
+                            <div>
+                              <label className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-2 block">
+                                Status
+                              </label>
+                              <div className="space-y-2">
+                                {['all', 'live', 'deploying'].map((status) => (
+                                  <button
+                                    key={status}
+                                    onClick={() => setStatusFilter(status as any)}
+                                    className={`w-full px-3 py-2 rounded-lg text-left text-sm transition-all ${
+                                      statusFilter === status
+                                        ? 'bg-gradient-to-r from-pmc-red to-pink-600 text-white shadow-md'
+                                        : 'bg-slate-50 text-slate-700 hover:bg-slate-100'
+                                    }`}
+                                  >
+                                    {status.charAt(0).toUpperCase() + status.slice(1)}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Plan Filter */}
+                            <div>
+                              <label className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-2 block">
+                                Plan
+                              </label>
+                              <div className="space-y-2">
+                                {['all', 'Starter', 'Pro', 'Scale'].map((plan) => (
+                                  <button
+                                    key={plan}
+                                    onClick={() => setPlanFilter(plan as any)}
+                                    className={`w-full px-3 py-2 rounded-lg text-left text-sm transition-all ${
+                                      planFilter === plan
+                                        ? 'bg-gradient-to-r from-pmc-red to-pink-600 text-white shadow-md'
+                                        : 'bg-slate-50 text-slate-700 hover:bg-slate-100'
+                                    }`}
+                                  >
+                                    {plan}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="px-4 py-3 bg-slate-50 border-t border-slate-200">
+                            <button
+                              onClick={() => setShowFilterDropdown(false)}
+                              className="w-full px-4 py-2 bg-gradient-to-r from-pmc-red to-pink-600 text-white rounded-lg font-medium hover:from-pmc-red-dark hover:to-pink-700 transition-all"
+                            >
+                              Apply Filters
+                            </button>
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
                 </div>
                 <div className="flex items-center space-x-2">
                   <button
@@ -285,17 +387,18 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Sites Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Sites Grid/List */}
+            <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}>
               {filteredSites.map((site) => (
-                <article key={site.id} className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-2xl hover:border-pmc-red/30 transition-all duration-300 transform hover:-translate-y-1 group">
+                <article key={site.id} className={`bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-2xl hover:border-pmc-red/30 transition-all duration-300 ${viewMode === 'grid' ? 'transform hover:-translate-y-1' : ''} group ${viewMode === 'list' ? 'flex flex-col md:flex-row' : ''}`}>
                   {/* Site Thumbnail */}
-                  <div className={`relative h-48 bg-gradient-to-br ${site.gradient} overflow-hidden`}>
+                  <div className={`relative bg-gradient-to-br ${site.gradient} overflow-hidden ${viewMode === 'grid' ? 'h-48' : 'h-48 md:h-auto md:w-64 flex-shrink-0'}`}>
                     <Image
                       src={site.image}
                       alt={site.name}
                       fill
                       className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+                      unoptimized
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="absolute top-3 right-3 flex space-x-2">
@@ -305,8 +408,8 @@ export default function HomePage() {
                   </div>
 
                   {/* Site Info */}
-                  <div className="p-5">
-                    <div className="mb-3">
+                  <div className={`p-5 ${viewMode === 'list' ? 'flex-1 flex flex-col md:flex-row md:items-center md:justify-between gap-4' : ''}`}>
+                    <div className={`${viewMode === 'grid' ? 'mb-3' : 'flex-1'}`}>
                       <h3 className="text-lg font-bold text-slate-900 mb-1">{site.name}</h3>
                       <div className="flex items-center space-x-2 text-sm text-slate-600">
                         <FontAwesomeIcon icon={faLink} className="text-xs" />
@@ -372,7 +475,8 @@ export default function HomePage() {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="grid grid-cols-2 gap-2 mb-3">
+                    <div className={`${viewMode === 'list' ? 'flex-shrink-0 md:w-auto' : ''}`}>
+                    <div className={`grid ${viewMode === 'list' ? 'grid-cols-2 md:grid-cols-4' : 'grid-cols-2'} gap-2 mb-3`}>
                       <Link
                         href={`/sites/${site.id}/overview`}
                         className="px-3 py-2 bg-gradient-to-r from-pmc-red to-pink-600 hover:from-pmc-red-dark hover:to-pink-700 text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1 shadow-md hover:shadow-lg transition-all transform hover:scale-105"
@@ -389,7 +493,7 @@ export default function HomePage() {
                       </Link>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className={`grid ${viewMode === 'list' ? 'grid-cols-2 md:grid-cols-4' : 'grid-cols-2'} gap-2 ${viewMode === 'list' ? '' : 'mb-3'}`}>
                       <Link
                         href={`/sites/${site.id}/content-editor`}
                         className="px-3 py-2 border-2 border-pmc-red hover:bg-pmc-red text-pmc-red hover:text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1 transition-all transform hover:scale-105"
@@ -407,7 +511,7 @@ export default function HomePage() {
                     </div>
 
                     {/* Footer */}
-                    <div className="mt-3 pt-3 border-t border-slate-200 flex items-center justify-between">
+                    <div className={`mt-3 pt-3 ${viewMode === 'grid' ? 'border-t border-slate-200' : ''} flex items-center justify-between`}>
                       <Link
                         href="/billing"
                         className="text-xs text-pmc-red hover:text-pmc-red-dark font-medium transition-colors"
@@ -421,6 +525,7 @@ export default function HomePage() {
                         <FontAwesomeIcon icon={faFileLines} />
                         <span>View Logs</span>
                       </Link>
+                    </div>
                     </div>
                   </div>
                 </article>
