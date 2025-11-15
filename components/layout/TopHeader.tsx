@@ -84,8 +84,30 @@ export default function TopHeader({
   const [showSiteDropdown, setShowSiteDropdown] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showSearchResults, setShowSearchResults] = useState(false);
 
   const currentSite = currentSiteId ? mockSites.find(s => s.id === currentSiteId) : null;
+
+  // Filter sites based on search query
+  const searchResults = searchQuery.trim()
+    ? mockSites.filter(site =>
+        site.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        site.domain.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    setShowSearchResults(value.trim().length > 0);
+  };
+
+  const handleSearchResultClick = (siteId: string) => {
+    router.push(`/sites/${siteId}/overview`);
+    setSearchQuery('');
+    setShowSearchResults(false);
+  };
 
   const handleSiteChange = (siteId: string) => {
     const currentPath = window.location.pathname;
@@ -198,13 +220,84 @@ export default function TopHeader({
               <input
                 type="text"
                 placeholder="Search sites or domains..."
-                className="w-48 lg:w-80 pl-10 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pmc-red focus:border-transparent transition-all"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                onFocus={() => searchQuery && setShowSearchResults(true)}
+                className="w-48 lg:w-80 pl-10 pr-4 py-2 border-2 border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-pmc-red/50 focus:border-pmc-red transition-all hover:border-slate-400"
                 aria-label="Search sites or domains"
               />
               <FontAwesomeIcon
                 icon={faSearch}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"
+                className={`absolute left-3 top-1/2 -translate-y-1/2 text-sm transition-colors ${
+                  searchQuery ? 'text-pmc-red' : 'text-slate-400'
+                }`}
               />
+
+              {/* Search Results Dropdown */}
+              {showSearchResults && (
+                <>
+                  {/* Backdrop */}
+                  <div
+                    className="fixed inset-0 z-30"
+                    onClick={() => setShowSearchResults(false)}
+                  />
+
+                  {/* Results */}
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl border-2 border-pmc-red/20 shadow-2xl z-40 max-h-96 overflow-hidden">
+                    {searchResults.length > 0 ? (
+                      <div className="overflow-y-auto max-h-96">
+                        <div className="px-3 py-2 bg-gradient-to-r from-pmc-red/5 to-pink-50 border-b border-pmc-red/10">
+                          <p className="text-xs font-semibold text-pmc-red uppercase tracking-wide">
+                            Found {searchResults.length} {searchResults.length === 1 ? 'site' : 'sites'}
+                          </p>
+                        </div>
+                        {searchResults.map((site) => (
+                          <button
+                            key={site.id}
+                            onClick={() => handleSearchResultClick(site.id)}
+                            className="w-full px-4 py-3 hover:bg-gradient-to-r hover:from-pmc-red/5 hover:to-pink-50 transition-all border-b border-slate-100 last:border-0 text-left group"
+                          >
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center space-x-3 flex-1">
+                                <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${site.gradient} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
+                                  <FontAwesomeIcon icon={faCircle} className={`${getStatusColor(site.status)} text-xs`} />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <p className="text-sm font-semibold text-slate-900 truncate group-hover:text-pmc-red transition-colors">
+                                    {site.name}
+                                  </p>
+                                  <p className="text-xs text-slate-500 truncate">{site.domain}</p>
+                                </div>
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                                  site.status === 'live'
+                                    ? 'bg-green-100 text-green-700'
+                                    : 'bg-yellow-100 text-yellow-700'
+                                }`}>
+                                  {site.status}
+                                </span>
+                                <FontAwesomeIcon
+                                  icon={faSearch}
+                                  className="text-pmc-red opacity-0 group-hover:opacity-100 transition-opacity text-xs"
+                                />
+                              </div>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="px-4 py-8 text-center">
+                        <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                          <FontAwesomeIcon icon={faSearch} className="text-slate-400 text-2xl" />
+                        </div>
+                        <p className="text-sm font-medium text-slate-900 mb-1">No sites found</p>
+                        <p className="text-xs text-slate-500">Try searching with a different term</p>
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
             </div>
           )}
 
