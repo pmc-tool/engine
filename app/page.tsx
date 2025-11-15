@@ -402,8 +402,8 @@ export default function HomePage() {
               {/* Total Sites */}
               <div className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-md hover:border-slate-300 transition-all">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faGlobe} className="text-slate-600 text-lg" />
+                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
+                    <FontAwesomeIcon icon={faGlobe} className="text-blue-600 text-lg" />
                   </div>
                   <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">
                     ↑ +12%
@@ -430,8 +430,8 @@ export default function HomePage() {
               {/* Connects Available */}
               <div className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-md hover:border-slate-300 transition-all">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faBolt} className="text-slate-600 text-lg" />
+                  <div className="w-12 h-12 bg-amber-50 rounded-lg flex items-center justify-center">
+                    <FontAwesomeIcon icon={faBolt} className="text-amber-600 text-lg" />
                   </div>
                   <span className="text-xs font-semibold text-orange-700 bg-orange-50 px-2.5 py-1 rounded-full">
                     ↓ -8%
@@ -444,8 +444,8 @@ export default function HomePage() {
               {/* Total Visitors */}
               <div className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-md hover:border-slate-300 transition-all">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faChartLine} className="text-slate-600 text-lg" />
+                  <div className="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center">
+                    <FontAwesomeIcon icon={faChartLine} className="text-purple-600 text-lg" />
                   </div>
                   <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">
                     ↑ +24%
