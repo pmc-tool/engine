@@ -18,6 +18,9 @@ import {
   faLifeRing,
   faChevronDown,
   faDatabase,
+  faCrown,
+  faArrowRight,
+  faCheckCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import { faWordpress } from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
@@ -277,6 +280,46 @@ export default function Sidebar() {
           >
             <FontAwesomeIcon icon={faLifeRing} className="w-5 mr-3 text-slate-500" />
             <span>Support</span>
+          </Link>
+        </div>
+
+        {/* Current Plan Card */}
+        <div className="mx-3 mb-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+              <FontAwesomeIcon icon={faCheckCircle} className="text-white text-sm" />
+            </div>
+            <div>
+              <p className="text-white text-xs font-medium">Current Plan</p>
+              <p className="text-white text-lg font-bold">Pro Plan</p>
+            </div>
+          </div>
+          <div className="flex items-center justify-between text-white text-xs mt-3 pt-3 border-t border-white/20">
+            <span>3 Sites Active</span>
+            <span>127 Connects</span>
+          </div>
+        </div>
+
+        {/* Upgrade Plan Card */}
+        <div className="mx-3 mb-4">
+          <Link
+            href="/billing"
+            className="block bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl p-4 hover:from-purple-700 hover:to-pink-700 transition-all group"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+                <FontAwesomeIcon icon={faCrown} className="text-white text-sm" />
+              </div>
+              <div>
+                <p className="text-white text-xs font-medium">Upgrade to</p>
+                <p className="text-white text-lg font-bold">Scale Plan</p>
+              </div>
+            </div>
+            <p className="text-white/90 text-xs mb-3">Unlimited sites & connects</p>
+            <div className="flex items-center justify-between text-white text-xs font-semibold">
+              <span>Learn More</span>
+              <FontAwesomeIcon icon={faArrowRight} className="text-sm group-hover:translate-x-1 transition-transform" />
+            </div>
           </Link>
         </div>
       </nav>
