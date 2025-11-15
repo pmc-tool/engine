@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faRocket,
@@ -49,18 +50,21 @@ export default function Sidebar() {
     <aside className="hidden lg:flex w-64 bg-white border-r border-slate-200 flex-col transition-all duration-300">
       {/* Header */}
       <div className="p-6 border-b border-slate-200">
-        <div className="flex items-center justify-between mb-1">
-          <Link href="/" className="flex items-center group w-full">
-            <img
+        <Link href="/" className="group block">
+          <div className="relative">
+            <Image
               src="/images/packmycode-logo.png"
               alt="PackMyCode"
-              className="h-7 w-auto transition-all group-hover:scale-105"
+              width={180}
+              height={40}
+              className="transition-all group-hover:scale-105"
+              priority
             />
-          </Link>
-          <button className="text-slate-400 hover:text-pmc-red transition-colors p-2 hover:bg-slate-50 rounded-lg" aria-label="Collapse sidebar">
-            <FontAwesomeIcon icon={faBars} className="text-sm" />
-          </button>
-        </div>
+            {/* <div className="absolute bottom-0 right-6 text-[10px] font-semibold text-slate-500 tracking-wider">
+              ENGINE
+            </div> */}
+          </div>
+        </Link>
       </div>
 
       {/* Navigation */}

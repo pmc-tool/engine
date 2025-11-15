@@ -367,55 +367,83 @@ export default function HomePage() {
 
             {/* Stats Overview */}
             <div className="mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-white rounded-xl border border-slate-200 p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faGlobe} className="text-blue-600 text-xl" />
+              {/* Total Sites */}
+              <div className="group relative bg-gradient-to-br from-blue-50 via-white to-blue-50/30 rounded-2xl border-2 border-blue-100 p-6 hover:shadow-xl hover:shadow-blue-500/20 hover:border-blue-300 transition-all duration-300 hover:scale-105">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/10 to-transparent rounded-full blur-2xl group-hover:from-blue-400/20 transition-all"></div>
+                <div className="relative">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:shadow-xl group-hover:shadow-blue-500/40 group-hover:scale-110 transition-all">
+                      <FontAwesomeIcon icon={faGlobe} className="text-white text-xl" />
+                    </div>
+                    <span className="flex items-center gap-1 text-xs font-bold text-green-600 bg-green-100 px-2.5 py-1.5 rounded-full">
+                      <span>↑</span> +12%
+                    </span>
                   </div>
-                  <span className="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded">+12%</span>
+                  <div className="text-3xl font-extrabold text-slate-900 mb-1">{totalSites}</div>
+                  <div className="text-sm font-medium text-slate-600">Total Sites</div>
                 </div>
-                <div className="text-2xl font-bold text-slate-900 mb-1">{totalSites}</div>
-                <div className="text-sm text-slate-600">Total Sites</div>
               </div>
 
-              <div className="bg-white rounded-xl border border-slate-200 p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faCircleCheck} className="text-green-600 text-xl" />
+              {/* Live Sites - Featured/Primary */}
+              <div className="group relative bg-gradient-to-br from-emerald-50 via-white to-green-50/30 rounded-2xl border-2 border-green-200 p-6 hover:shadow-2xl hover:shadow-green-500/30 hover:border-green-400 transition-all duration-300 hover:scale-105">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-400/10 to-transparent rounded-full blur-2xl group-hover:from-green-400/20 transition-all"></div>
+                <div className="relative">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/30 group-hover:shadow-xl group-hover:shadow-green-500/50 group-hover:scale-110 transition-all animate-pulse">
+                      <FontAwesomeIcon icon={faCircleCheck} className="text-white text-xl" />
+                    </div>
+                    <span className="flex items-center gap-1 text-xs font-bold text-green-700 bg-green-200 px-2.5 py-1.5 rounded-full">
+                      98% Uptime
+                    </span>
                   </div>
-                  <span className="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded">98%</span>
+                  <div className="text-3xl font-extrabold text-slate-900 mb-1">{liveSites}</div>
+                  <div className="text-sm font-medium text-slate-600">Live Sites</div>
                 </div>
-                <div className="text-2xl font-bold text-slate-900 mb-1">{liveSites}</div>
-                <div className="text-sm text-slate-600">Live Sites</div>
               </div>
 
-              <div className="bg-white rounded-xl border border-slate-200 p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 bg-purple-50 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faBolt} className="text-purple-600 text-xl" />
+              {/* Connects Available */}
+              <div className="group relative bg-gradient-to-br from-purple-50 via-white to-pink-50/30 rounded-2xl border-2 border-purple-100 p-6 hover:shadow-xl hover:shadow-purple-500/20 hover:border-purple-300 transition-all duration-300 hover:scale-105">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-400/10 to-transparent rounded-full blur-2xl group-hover:from-purple-400/20 transition-all"></div>
+                <div className="relative">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-500/30 group-hover:shadow-xl group-hover:shadow-purple-500/40 group-hover:scale-110 transition-all">
+                      <FontAwesomeIcon icon={faBolt} className="text-white text-xl" />
+                    </div>
+                    <span className="flex items-center gap-1 text-xs font-bold text-orange-600 bg-orange-100 px-2.5 py-1.5 rounded-full">
+                      <span>↓</span> -8%
+                    </span>
                   </div>
-                  <span className="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded">-8%</span>
+                  <div className="text-3xl font-extrabold text-slate-900 mb-1">{connectsAvailable}</div>
+                  <div className="text-sm font-medium text-slate-600">Connects Available</div>
                 </div>
-                <div className="text-2xl font-bold text-slate-900 mb-1">{connectsAvailable}</div>
-                <div className="text-sm text-slate-600">Connects Available</div>
               </div>
 
-              <div className="bg-white rounded-xl border border-slate-200 p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 bg-orange-50 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faChartLine} className="text-orange-600 text-xl" />
+              {/* Total Visitors */}
+              <div className="group relative bg-gradient-to-br from-orange-50 via-white to-amber-50/30 rounded-2xl border-2 border-orange-100 p-6 hover:shadow-xl hover:shadow-orange-500/20 hover:border-orange-300 transition-all duration-300 hover:scale-105">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-orange-400/10 to-transparent rounded-full blur-2xl group-hover:from-orange-400/20 transition-all"></div>
+                <div className="relative">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl flex items-center justify-center shadow-lg shadow-orange-500/30 group-hover:shadow-xl group-hover:shadow-orange-500/40 group-hover:scale-110 transition-all">
+                      <FontAwesomeIcon icon={faChartLine} className="text-white text-xl" />
+                    </div>
+                    <span className="flex items-center gap-1 text-xs font-bold text-green-600 bg-green-100 px-2.5 py-1.5 rounded-full">
+                      <span>↑</span> +24%
+                    </span>
                   </div>
-                  <span className="text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded">+24%</span>
+                  <div className="text-3xl font-extrabold text-slate-900 mb-1">{totalVisitors}</div>
+                  <div className="text-sm font-medium text-slate-600">Total Visitors</div>
                 </div>
-                <div className="text-2xl font-bold text-slate-900 mb-1">{totalVisitors}</div>
-                <div className="text-sm text-slate-600">Total Visitors</div>
               </div>
             </div>
 
             {/* Sites Grid/List */}
             <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}>
-              {filteredSites.map((site) => (
-                <article key={site.id} className={`bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-2xl hover:border-pmc-red/30 transition-all duration-300 ${viewMode === 'grid' ? 'transform hover:-translate-y-1' : ''} group ${viewMode === 'list' ? 'flex flex-col sm:flex-row' : ''}`}>
+              {filteredSites.map((site, index) => (
+                <article
+                  key={site.id}
+                  className={`bg-white rounded-2xl border-2 border-slate-100 overflow-hidden hover:shadow-2xl hover:shadow-pmc-red/10 hover:border-pmc-red/40 transition-all duration-300 ${viewMode === 'grid' ? 'transform hover:-translate-y-2' : ''} group ${viewMode === 'list' ? 'flex flex-col sm:flex-row' : ''}`}
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
                   {/* Site Thumbnail */}
                   <div className={`relative bg-gradient-to-br ${site.gradient} overflow-hidden ${viewMode === 'grid' ? 'h-48' : 'h-48 sm:h-auto sm:w-48 lg:w-64 flex-shrink-0'}`}>
                     <Image
@@ -435,57 +463,65 @@ export default function HomePage() {
                   {/* Site Info */}
                   <div className={`p-5 flex-1 ${viewMode === 'list' ? 'flex flex-col justify-between' : ''}`}>
                     {/* Header Section */}
-                    <div className={`${viewMode === 'list' ? 'mb-4' : 'mb-3'}`}>
-                      <h3 className="text-lg font-bold text-slate-900 mb-1">{site.name}</h3>
+                    <div className={`${viewMode === 'list' ? 'mb-3' : 'mb-3'}`}>
+                      <h3 className="text-xl font-bold text-slate-900 mb-1 group-hover:text-pmc-red transition-colors">{site.name}</h3>
                       <div className="flex items-center space-x-2 text-sm text-slate-600 mb-2">
                         <FontAwesomeIcon icon={faLink} className="text-xs" />
-                        <span className="text-blue-600">{site.customDomain}</span>
+                        <span className="text-blue-600 hover:underline">{site.customDomain}</span>
                       </div>
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="px-2 py-1 bg-blue-50 text-blue-600 text-xs font-medium rounded whitespace-nowrap">
+                        <span className="px-2.5 py-1 bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 text-xs font-semibold rounded-md whitespace-nowrap border border-blue-200">
                           {site.pmcDomain}
                         </span>
                         {getTechIcon(site.tech)}
                       </div>
                     </div>
 
-                    {/* Progress Bars - Only in Grid View */}
-                    <div className={`space-y-3 mb-4 ${viewMode === 'list' ? 'hidden' : ''}`}>
+                    {/* Progress Bars - Show in Both Views */}
+                    <div className={`space-y-2.5 mb-4 ${viewMode === 'list' ? 'lg:grid lg:grid-cols-2 lg:gap-3 lg:space-y-0' : ''}`}>
                       <div>
-                        <div className="flex items-center justify-between text-xs text-slate-600 mb-1">
-                          <span className="flex items-center">
-                            <FontAwesomeIcon icon={faArrowUpRightDots} className="mr-1" />
+                        <div className="flex items-center justify-between text-xs font-medium text-slate-700 mb-1.5">
+                          <span className="flex items-center gap-1.5">
+                            <FontAwesomeIcon icon={faArrowUpRightDots} className="text-pmc-red" />
                             Bandwidth
                           </span>
-                          <span className="font-medium group-hover:text-pmc-red transition-colors">{site.bandwidth.used} GB / {site.bandwidth.total} GB</span>
+                          <span className="font-semibold group-hover:text-pmc-red transition-colors">
+                            {site.bandwidth.used}<span className="text-slate-500"> / {site.bandwidth.total} GB</span>
+                          </span>
                         </div>
-                        <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+                        <div className="w-full bg-gradient-to-r from-slate-100 to-slate-200 rounded-full h-2.5 overflow-hidden shadow-inner">
                           <div
-                            className="bg-gradient-to-r from-pmc-red to-pink-600 h-2 rounded-full transition-all duration-500 group-hover:shadow-lg group-hover:shadow-pmc-red/50"
+                            className="bg-gradient-to-r from-pmc-red via-pink-500 to-pink-600 h-2.5 rounded-full transition-all duration-700 group-hover:shadow-lg group-hover:shadow-pmc-red/60 relative overflow-hidden"
                             style={{ width: `${site.bandwidth.percent}%` }}
-                          ></div>
+                          >
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
+                          </div>
                         </div>
                       </div>
 
                       <div>
-                        <div className="flex items-center justify-between text-xs text-slate-600 mb-1">
-                          <span className="flex items-center">
-                            <FontAwesomeIcon icon={faDatabase} className="mr-1" />
+                        <div className="flex items-center justify-between text-xs font-medium text-slate-700 mb-1.5">
+                          <span className="flex items-center gap-1.5">
+                            <FontAwesomeIcon icon={faDatabase} className="text-purple-600" />
                             Storage
                           </span>
-                          <span className="font-medium group-hover:text-pmc-red transition-colors">{site.storage.used} GB / {site.storage.total} GB</span>
+                          <span className="font-semibold group-hover:text-purple-600 transition-colors">
+                            {site.storage.used}<span className="text-slate-500"> / {site.storage.total} GB</span>
+                          </span>
                         </div>
-                        <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+                        <div className="w-full bg-gradient-to-r from-slate-100 to-slate-200 rounded-full h-2.5 overflow-hidden shadow-inner">
                           <div
-                            className="bg-gradient-to-r from-purple-600 to-pink-600 h-2 rounded-full transition-all duration-500 group-hover:shadow-lg group-hover:shadow-purple-500/50"
+                            className="bg-gradient-to-r from-purple-600 via-purple-500 to-pink-600 h-2.5 rounded-full transition-all duration-700 group-hover:shadow-lg group-hover:shadow-purple-500/60 relative overflow-hidden"
                             style={{ width: `${site.storage.percent}%` }}
-                          ></div>
+                          >
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
+                          </div>
                         </div>
                       </div>
                     </div>
 
                     {/* Connects Info */}
-                    <div className={`bg-gradient-to-r from-slate-50 to-pink-50/30 group-hover:from-pink-50 group-hover:to-pmc-red/5 rounded-lg p-3 mb-4 border border-transparent group-hover:border-pmc-red/20 transition-all duration-300 ${viewMode === 'list' ? 'hidden' : ''}`}>
+                    <div className="bg-gradient-to-r from-pink-50 via-pmc-red/5 to-orange-50/30 group-hover:from-pink-100 group-hover:to-pmc-red/10 rounded-xl p-3 mb-4 border-2 border-transparent group-hover:border-pmc-red/30 transition-all duration-300 shadow-sm">
                       <div className="flex items-center justify-between text-xs">
                         <span className="text-slate-600">
                           Connects used: <span className="font-bold text-pmc-red group-hover:scale-110 inline-block transition-transform">{site.connectsUsed}</span>
@@ -498,36 +534,36 @@ export default function HomePage() {
 
                     {/* Action Buttons */}
                     <div className={`${viewMode === 'list' ? 'mt-auto' : ''}`}>
-                      <div className={`grid ${viewMode === 'list' ? 'grid-cols-2 lg:grid-cols-4' : 'grid-cols-2'} gap-2`}>
+                      <div className={`grid ${viewMode === 'list' ? 'grid-cols-2 lg:grid-cols-4' : 'grid-cols-2'} gap-2.5`}>
                         <Link
                           href={`/sites/${site.id}/overview`}
-                          className="px-3 py-2 bg-gradient-to-r from-pmc-red to-pink-600 hover:from-pmc-red-dark hover:to-pink-700 text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1 shadow-md hover:shadow-lg transition-all transform hover:scale-105"
+                          className="px-3 py-2.5 bg-gradient-to-r from-pmc-red via-pink-500 to-pink-600 hover:from-pmc-red-dark hover:via-pink-600 hover:to-pink-700 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 shadow-lg shadow-pmc-red/30 hover:shadow-xl hover:shadow-pmc-red/50 transition-all transform hover:scale-110 active:scale-95"
                         >
-                          <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+                          <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-sm" />
                           <span className={`${viewMode === 'list' ? 'hidden lg:inline' : ''}`}>Open Manager</span>
                           <span className={`${viewMode === 'list' ? 'lg:hidden' : 'hidden'}`}>Open</span>
                         </Link>
                         <Link
                           href={`/sites/${site.id}/ai-assistant`}
-                          className="px-3 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1 shadow-md hover:shadow-lg transition-all transform hover:scale-105"
+                          className="px-3 py-2.5 bg-gradient-to-r from-purple-600 via-purple-500 to-pink-600 hover:from-purple-700 hover:via-purple-600 hover:to-pink-700 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/50 transition-all transform hover:scale-110 active:scale-95"
                         >
-                          <FontAwesomeIcon icon={faWandMagicSparkles} />
+                          <FontAwesomeIcon icon={faWandMagicSparkles} className="text-sm" />
                           <span className={`${viewMode === 'list' ? 'hidden lg:inline' : ''}`}>AI Re-customize</span>
                           <span className={`${viewMode === 'list' ? 'lg:hidden' : 'hidden'}`}>AI</span>
                         </Link>
                         <Link
                           href={`/sites/${site.id}/content-editor`}
-                          className="px-3 py-2 border-2 border-pmc-red hover:bg-pmc-red text-pmc-red hover:text-white text-xs font-medium rounded-lg flex items-center justify-center space-x-1 transition-all transform hover:scale-105"
+                          className="px-3 py-2.5 border-2 border-pmc-red bg-white hover:bg-pmc-red text-pmc-red hover:text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-all transform hover:scale-110 active:scale-95 hover:shadow-lg hover:shadow-pmc-red/30"
                         >
-                          <FontAwesomeIcon icon={faPencil} />
+                          <FontAwesomeIcon icon={faPencil} className="text-sm" />
                           <span className={`${viewMode === 'list' ? 'hidden lg:inline' : ''}`}>Edit Content</span>
                           <span className={`${viewMode === 'list' ? 'lg:hidden' : 'hidden'}`}>Edit</span>
                         </Link>
                         <Link
                           href={`/domains`}
-                          className="px-3 py-2 border-2 border-slate-300 hover:border-pmc-red hover:bg-pmc-red/10 text-slate-700 hover:text-pmc-red text-xs font-medium rounded-lg flex items-center justify-center space-x-1 transition-all transform hover:scale-105"
+                          className="px-3 py-2.5 border-2 border-slate-300 bg-white hover:border-pmc-red hover:bg-gradient-to-r hover:from-pmc-red/5 hover:to-pink-50 text-slate-700 hover:text-pmc-red text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-all transform hover:scale-110 active:scale-95 hover:shadow-md"
                         >
-                          <FontAwesomeIcon icon={faGlobe} />
+                          <FontAwesomeIcon icon={faGlobe} className="text-sm" />
                           <span className={`${viewMode === 'list' ? 'hidden lg:inline' : ''}`}>Manage Domain</span>
                           <span className={`${viewMode === 'list' ? 'lg:hidden' : 'hidden'}`}>Domain</span>
                         </Link>
@@ -557,54 +593,58 @@ export default function HomePage() {
           </section>
 
           {/* Quick Actions */}
-          <section className="mx-4 md:mx-6 lg:mx-8 mt-12 mb-8 bg-gradient-to-br from-pink-50 to-pmc-red/10 rounded-2xl border border-pmc-red/20 p-6 md:p-8">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-slate-900 mb-2">Quick Actions</h2>
-              <p className="text-slate-600">Get started with common tasks</p>
+          <section className="mx-4 md:mx-6 lg:mx-8 mt-12 mb-8 relative overflow-hidden bg-gradient-to-br from-pink-100 via-pmc-red/20 to-orange-100 rounded-3xl border-2 border-pmc-red/30 p-8 md:p-10 shadow-xl">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-pmc-red/20 to-transparent rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-pink-400/20 to-transparent rounded-full blur-3xl"></div>
+
+            <div className="relative text-center mb-8">
+              <h2 className="text-3xl font-extrabold text-slate-900 mb-2">Quick Actions</h2>
+              <p className="text-slate-700 font-medium">Get started with common tasks</p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+            <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               <Link
                 href="/wizard/theme"
-                className="bg-white hover:bg-gradient-to-br hover:from-pmc-red hover:to-pink-600 border border-slate-200 hover:border-pmc-red rounded-xl p-6 text-left transition-all duration-300 block group/action hover:shadow-xl hover:-translate-y-1"
+                className="group/action relative bg-white/90 backdrop-blur-sm hover:bg-gradient-to-br hover:from-pmc-red hover:to-pink-600 border-2 border-slate-200 hover:border-pmc-red rounded-2xl p-6 text-left transition-all duration-300 block hover:shadow-2xl hover:shadow-pmc-red/30 hover:-translate-y-2 hover:scale-105"
               >
-                <div className="w-12 h-12 bg-pmc-red/10 group-hover/action:bg-white rounded-lg flex items-center justify-center mb-4 transition-colors">
-                  <FontAwesomeIcon icon={faPlus} className="text-pmc-red group-hover/action:text-pmc-red text-xl transition-colors" />
+                <div className="w-14 h-14 bg-gradient-to-br from-pmc-red to-pink-600 group-hover/action:from-white group-hover/action:to-white rounded-xl flex items-center justify-center mb-4 transition-all shadow-lg group-hover/action:shadow-xl">
+                  <FontAwesomeIcon icon={faPlus} className="text-white group-hover/action:text-pmc-red text-xl transition-colors" />
                 </div>
-                <h3 className="font-semibold text-slate-900 group-hover/action:text-white mb-1 transition-colors">Create New Site</h3>
-                <p className="text-sm text-slate-600 group-hover/action:text-white/90 transition-colors">Start a new project with AI wizard</p>
+                <h3 className="font-bold text-lg text-slate-900 group-hover/action:text-white mb-1.5 transition-colors">Create New Site</h3>
+                <p className="text-sm text-slate-600 group-hover/action:text-white/95 transition-colors">Start a new project with AI wizard</p>
               </Link>
 
               <Link
                 href="/billing"
-                className="bg-white hover:bg-gradient-to-br hover:from-purple-600 hover:to-pink-600 border border-slate-200 hover:border-purple-600 rounded-xl p-6 text-left transition-all duration-300 block group/action hover:shadow-xl hover:-translate-y-1"
+                className="group/action relative bg-white/90 backdrop-blur-sm hover:bg-gradient-to-br hover:from-purple-600 hover:to-pink-600 border-2 border-slate-200 hover:border-purple-600 rounded-2xl p-6 text-left transition-all duration-300 block hover:shadow-2xl hover:shadow-purple-500/30 hover:-translate-y-2 hover:scale-105"
               >
-                <div className="w-12 h-12 bg-purple-100 group-hover/action:bg-white rounded-lg flex items-center justify-center mb-4 transition-colors">
-                  <FontAwesomeIcon icon={faBolt} className="text-purple-600 group-hover/action:text-purple-600 text-xl transition-colors" />
+                <div className="w-14 h-14 bg-gradient-to-br from-purple-600 to-pink-600 group-hover/action:from-white group-hover/action:to-white rounded-xl flex items-center justify-center mb-4 transition-all shadow-lg group-hover/action:shadow-xl">
+                  <FontAwesomeIcon icon={faBolt} className="text-white group-hover/action:text-purple-600 text-xl transition-colors" />
                 </div>
-                <h3 className="font-semibold text-slate-900 group-hover/action:text-white mb-1 transition-colors">Buy Connects</h3>
-                <p className="text-sm text-slate-600 group-hover/action:text-white/90 transition-colors">Get more AI customization power</p>
+                <h3 className="font-bold text-lg text-slate-900 group-hover/action:text-white mb-1.5 transition-colors">Buy Connects</h3>
+                <p className="text-sm text-slate-600 group-hover/action:text-white/95 transition-colors">Get more AI customization power</p>
               </Link>
 
               <Link
                 href="/wizard/theme"
-                className="bg-white hover:bg-gradient-to-br hover:from-pmc-red hover:to-pink-600 border border-slate-200 hover:border-pmc-red rounded-xl p-6 text-left transition-all duration-300 block group/action hover:shadow-xl hover:-translate-y-1"
+                className="group/action relative bg-white/90 backdrop-blur-sm hover:bg-gradient-to-br hover:from-blue-600 hover:to-indigo-600 border-2 border-slate-200 hover:border-blue-600 rounded-2xl p-6 text-left transition-all duration-300 block hover:shadow-2xl hover:shadow-blue-500/30 hover:-translate-y-2 hover:scale-105"
               >
-                <div className="w-12 h-12 bg-pmc-red/10 group-hover/action:bg-white rounded-lg flex items-center justify-center mb-4 transition-colors">
-                  <FontAwesomeIcon icon={faLayerGroup} className="text-pmc-red group-hover/action:text-pmc-red text-xl transition-colors" />
+                <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-600 group-hover/action:from-white group-hover/action:to-white rounded-xl flex items-center justify-center mb-4 transition-all shadow-lg group-hover/action:shadow-xl">
+                  <FontAwesomeIcon icon={faLayerGroup} className="text-white group-hover/action:text-blue-600 text-xl transition-colors" />
                 </div>
-                <h3 className="font-semibold text-slate-900 group-hover/action:text-white mb-1 transition-colors">Browse Templates</h3>
-                <p className="text-sm text-slate-600 group-hover/action:text-white/90 transition-colors">Explore pre-built site templates</p>
+                <h3 className="font-bold text-lg text-slate-900 group-hover/action:text-white mb-1.5 transition-colors">Browse Templates</h3>
+                <p className="text-sm text-slate-600 group-hover/action:text-white/95 transition-colors">Explore pre-built site templates</p>
               </Link>
 
               <Link
                 href="/support"
-                className="bg-white hover:bg-gradient-to-br hover:from-pmc-red hover:to-pink-600 border border-slate-200 hover:border-pmc-red rounded-xl p-6 text-left transition-all duration-300 block group/action hover:shadow-xl hover:-translate-y-1"
+                className="group/action relative bg-white/90 backdrop-blur-sm hover:bg-gradient-to-br hover:from-orange-600 hover:to-pmc-red border-2 border-slate-200 hover:border-orange-600 rounded-2xl p-6 text-left transition-all duration-300 block hover:shadow-2xl hover:shadow-orange-500/30 hover:-translate-y-2 hover:scale-105"
               >
-                <div className="w-12 h-12 bg-pmc-red/10 group-hover/action:bg-white rounded-lg flex items-center justify-center mb-4 transition-colors">
-                  <FontAwesomeIcon icon={faBook} className="text-pmc-red group-hover/action:text-pmc-red text-xl transition-colors" />
+                <div className="w-14 h-14 bg-gradient-to-br from-orange-600 to-pmc-red group-hover/action:from-white group-hover/action:to-white rounded-xl flex items-center justify-center mb-4 transition-all shadow-lg group-hover/action:shadow-xl">
+                  <FontAwesomeIcon icon={faBook} className="text-white group-hover/action:text-orange-600 text-xl transition-colors" />
                 </div>
-                <h3 className="font-semibold text-slate-900 group-hover/action:text-white mb-1 transition-colors">Documentation</h3>
-                <p className="text-sm text-slate-600 group-hover/action:text-white/90 transition-colors">Learn how to use PMC Engine</p>
+                <h3 className="font-bold text-lg text-slate-900 group-hover/action:text-white mb-1.5 transition-colors">Documentation</h3>
+                <p className="text-sm text-slate-600 group-hover/action:text-white/95 transition-colors">Learn how to use PMC Engine</p>
               </Link>
             </div>
           </section>
