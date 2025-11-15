@@ -398,8 +398,8 @@ export default function HomePage() {
             </div>
 
             {/* Stats Overview */}
-            <div className="mb-8 bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-xl p-6 md:p-8">
-              <h2 className="text-lg font-bold text-slate-900 mb-6">Overview</h2>
+            <div className="mb-10">
+              <h2 className="text-xl font-bold text-slate-900 mb-6">Overview</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Total Sites */}
               <div className="bg-white rounded-xl border border-slate-200 p-6 hover:shadow-md hover:border-slate-300 transition-all">
@@ -460,6 +460,9 @@ export default function HomePage() {
             </div>
 
             {/* Sites Grid/List */}
+            <div className="mb-6">
+              <h2 className="text-xl font-bold text-slate-900 mb-6">Your Sites</h2>
+            </div>
             <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}>
               {filteredSites.map((site, index) => (
                 <article
