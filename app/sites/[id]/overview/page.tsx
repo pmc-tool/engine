@@ -49,7 +49,7 @@ export default function SiteOverviewPage() {
         <main className="flex-1 overflow-y-auto bg-slate-50">
           <section className="p-4 md:p-6 lg:p-8">
             {/* Site Header */}
-            <div className="bg-white border border-slate-200 rounded-xl p-6 md:p-8 hover:shadow-md hover:border-slate-300 transition-all mb-6 md:mb-8">
+            <div className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-xl p-6 md:p-8 hover:shadow-md hover:border-slate-300 transition-all mb-6 md:mb-8">
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
                 <div className="flex-1">
                   <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
@@ -132,8 +132,8 @@ export default function SiteOverviewPage() {
               {/* Total Visits Card */}
               <div className="bg-white rounded-xl border border-slate-200 p-5 md:p-6 hover:shadow-md hover:border-slate-300 transition-all">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-slate-100 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faEye} className="text-slate-600 text-lg md:text-xl" />
+                  <div className="w-12 h-12 md:w-14 md:h-14 bg-blue-50 rounded-lg flex items-center justify-center">
+                    <FontAwesomeIcon icon={faEye} className="text-blue-600 text-lg md:text-xl" />
                   </div>
                   <span className="flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1.5 rounded-full">
                     ↑ +12%
@@ -164,8 +164,8 @@ export default function SiteOverviewPage() {
               {/* Storage Card */}
               <div className="bg-white rounded-xl border border-slate-200 p-5 md:p-6 hover:shadow-md hover:border-slate-300 transition-all">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-slate-100 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faDatabase} className="text-slate-600 text-lg md:text-xl" />
+                  <div className="w-12 h-12 md:w-14 md:h-14 bg-amber-50 rounded-lg flex items-center justify-center">
+                    <FontAwesomeIcon icon={faDatabase} className="text-amber-600 text-lg md:text-xl" />
                   </div>
                   <span className="flex items-center gap-1 text-xs font-semibold text-orange-700 bg-orange-50 px-2.5 py-1.5 rounded-full">
                     ↑ +8%
@@ -176,7 +176,7 @@ export default function SiteOverviewPage() {
                 </h3>
                 <p className="text-sm font-medium text-slate-600">Storage Used</p>
                 <div className="mt-3 w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                  <div className="bg-slate-600 h-2 rounded-full transition-all" style={{ width: '48%' }}></div>
+                  <div className="bg-amber-600 h-2 rounded-full transition-all" style={{ width: '48%' }}></div>
                 </div>
                 <p className="text-xs text-slate-500 mt-1.5">48% of 5 GB</p>
               </div>
@@ -184,8 +184,8 @@ export default function SiteOverviewPage() {
               {/* Load Time Card */}
               <div className="bg-white rounded-xl border border-slate-200 p-5 md:p-6 hover:shadow-md hover:border-slate-300 transition-all">
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 md:w-14 md:h-14 bg-slate-100 rounded-lg flex items-center justify-center">
-                    <FontAwesomeIcon icon={faChartLine} className="text-slate-600 text-lg md:text-xl" />
+                  <div className="w-12 h-12 md:w-14 md:h-14 bg-purple-50 rounded-lg flex items-center justify-center">
+                    <FontAwesomeIcon icon={faChartLine} className="text-purple-600 text-lg md:text-xl" />
                   </div>
                   <span className="flex items-center gap-1 text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1.5 rounded-full">
                     ↓ -5%
@@ -200,15 +200,15 @@ export default function SiteOverviewPage() {
 
             {/* Quick Actions */}
             <div className="mb-6 md:mb-8">
-              <div className="bg-slate-50 rounded-xl border border-slate-200 p-8 md:p-10">
-                <h3 className="text-xl md:text-2xl font-heading font-bold text-slate-900 mb-6">Quick Actions</h3>
+              <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-8 md:p-10">
+                <h3 className="text-xl md:text-2xl font-heading font-bold text-white mb-6">Quick Actions</h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                  <Link href={`/sites/${params.id}/backups`} className="bg-white border border-slate-200 hover:border-slate-300 rounded-xl p-6 hover:shadow-md transition-all text-left">
-                    <div className="w-14 h-14 bg-slate-100 rounded-lg flex items-center justify-center mb-4">
-                      <FontAwesomeIcon icon={faRocket} className="text-slate-600 text-xl" />
+                  <Link href={`/sites/${params.id}/backups`} className="bg-white border-l-4 border-blue-500 rounded-xl p-6 hover:shadow-md transition-all text-left group">
+                    <div className="w-14 h-14 bg-blue-500 rounded-lg flex items-center justify-center mb-4">
+                      <FontAwesomeIcon icon={faRocket} className="text-white text-xl" />
                     </div>
-                    <h4 className="font-heading font-bold text-slate-900 text-lg mb-2">
+                    <h4 className="font-heading font-bold text-slate-900 text-lg mb-2 group-hover:text-blue-600 transition-colors">
                       Deploy Site
                     </h4>
                     <p className="text-sm text-slate-600">
@@ -216,11 +216,11 @@ export default function SiteOverviewPage() {
                     </p>
                   </Link>
 
-                  <Link href={`/sites/${params.id}/files`} className="bg-white border border-slate-200 hover:border-slate-300 rounded-xl p-6 hover:shadow-md transition-all text-left">
-                    <div className="w-14 h-14 bg-slate-100 rounded-lg flex items-center justify-center mb-4">
-                      <FontAwesomeIcon icon={faCode} className="text-slate-600 text-xl" />
+                  <Link href={`/sites/${params.id}/files`} className="bg-white border-l-4 border-green-500 rounded-xl p-6 hover:shadow-md transition-all text-left group">
+                    <div className="w-14 h-14 bg-green-500 rounded-lg flex items-center justify-center mb-4">
+                      <FontAwesomeIcon icon={faCode} className="text-white text-xl" />
                     </div>
-                    <h4 className="font-heading font-bold text-slate-900 text-lg mb-2">
+                    <h4 className="font-heading font-bold text-slate-900 text-lg mb-2 group-hover:text-green-600 transition-colors">
                       Edit Code
                     </h4>
                     <p className="text-sm text-slate-600">
@@ -228,11 +228,11 @@ export default function SiteOverviewPage() {
                     </p>
                   </Link>
 
-                  <Link href={`/sites/${params.id}/domain`} className="bg-white border border-slate-200 hover:border-slate-300 rounded-xl p-6 hover:shadow-md transition-all text-left">
-                    <div className="w-14 h-14 bg-slate-100 rounded-lg flex items-center justify-center mb-4">
-                      <FontAwesomeIcon icon={faGlobe} className="text-slate-600 text-xl" />
+                  <Link href={`/sites/${params.id}/domain`} className="bg-white border-l-4 border-purple-500 rounded-xl p-6 hover:shadow-md transition-all text-left group">
+                    <div className="w-14 h-14 bg-purple-500 rounded-lg flex items-center justify-center mb-4">
+                      <FontAwesomeIcon icon={faGlobe} className="text-white text-xl" />
                     </div>
-                    <h4 className="font-heading font-bold text-slate-900 text-lg mb-2">
+                    <h4 className="font-heading font-bold text-slate-900 text-lg mb-2 group-hover:text-purple-600 transition-colors">
                       Manage Domain
                     </h4>
                     <p className="text-sm text-slate-600">
@@ -240,11 +240,11 @@ export default function SiteOverviewPage() {
                     </p>
                   </Link>
 
-                  <Link href={`/sites/${params.id}/security`} className="bg-white border border-slate-200 hover:border-slate-300 rounded-xl p-6 hover:shadow-md transition-all text-left">
-                    <div className="w-14 h-14 bg-slate-100 rounded-lg flex items-center justify-center mb-4">
-                      <FontAwesomeIcon icon={faShieldHalved} className="text-slate-600 text-xl" />
+                  <Link href={`/sites/${params.id}/security`} className="bg-white border-l-4 border-orange-500 rounded-xl p-6 hover:shadow-md transition-all text-left group">
+                    <div className="w-14 h-14 bg-orange-500 rounded-lg flex items-center justify-center mb-4">
+                      <FontAwesomeIcon icon={faShieldHalved} className="text-white text-xl" />
                     </div>
-                    <h4 className="font-heading font-bold text-slate-900 text-lg mb-2">
+                    <h4 className="font-heading font-bold text-slate-900 text-lg mb-2 group-hover:text-orange-600 transition-colors">
                       Security Scan
                     </h4>
                     <p className="text-sm text-slate-600">
