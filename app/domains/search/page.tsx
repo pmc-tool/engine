@@ -54,6 +54,8 @@ export default function DomainSearchPage() {
   const [showResults, setShowResults] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [showToast, setShowToast] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [suggestions, setSuggestions] = useState<string[]>([]);
 
   const searchResults: SearchResult[] = [
     {
@@ -138,10 +140,63 @@ export default function DomainSearchPage() {
     }
   ];
 
+  // Popular domain suggestions for different categories
+  const domainSuggestionWords = {
+    tech: ['tech', 'dev', 'code', 'app', 'cloud', 'digital', 'data', 'cyber', 'ai', 'smart'],
+    business: ['biz', 'corp', 'company', 'venture', 'enterprise', 'solutions', 'group', 'trade', 'market', 'hub'],
+    creative: ['creative', 'studio', 'design', 'art', 'media', 'pixel', 'vision', 'create', 'craft', 'inspire'],
+    shop: ['shop', 'store', 'market', 'boutique', 'mall', 'cart', 'buy', 'deals', 'sale', 'depot'],
+    service: ['services', 'pro', 'expert', 'consult', 'help', 'assist', 'support', 'care', 'guide', 'advisor'],
+    general: ['my', 'get', 'the', 'best', 'top', 'quick', 'easy', 'new', 'modern', 'smart']
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    setShowResults(false);
+
+    if (value.trim().length > 0) {
+      // Generate suggestions based on input
+      const allWords = Object.values(domainSuggestionWords).flat();
+      const matchingSuggestions = allWords
+        .filter(word => word.toLowerCase().includes(value.toLowerCase()) || value.toLowerCase().includes(word.toLowerCase()))
+        .slice(0, 5)
+        .map(word => value.trim() + word);
+
+      // Add some creative combinations
+      const creativeSuggestions = [
+        value.trim(),
+        value.trim() + 'hub',
+        value.trim() + 'pro',
+        value.trim() + 'app',
+        value.trim() + 'online',
+        'my' + value.trim(),
+        'get' + value.trim(),
+        value.trim() + 'now'
+      ].slice(0, 6);
+
+      setSuggestions([...new Set([...creativeSuggestions, ...matchingSuggestions])].slice(0, 8));
+      setShowSuggestions(true);
+    } else {
+      setShowSuggestions(false);
+      setSuggestions([]);
+    }
+  };
+
   const handleSearch = () => {
     if (searchQuery.trim()) {
       setShowResults(true);
+      setShowSuggestions(false);
     }
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setSearchQuery(suggestion);
+    setShowSuggestions(false);
+    setSearchQuery(suggestion);
+    setTimeout(() => {
+      setShowResults(true);
+    }, 100);
   };
 
   const handleAddToCart = () => {
@@ -198,14 +253,79 @@ export default function DomainSearchPage() {
                       <input
                         type="text"
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onChange={handleSearchChange}
                         onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                        onFocus={() => searchQuery && setShowSuggestions(true)}
                         placeholder="Enter your domain name"
-                        className="w-full px-4 md:px-5 py-3 md:py-4 pr-12 border-2 border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base md:text-lg font-medium"
+                        className="w-full px-4 md:px-5 py-3 md:py-4 pr-12 border-2 border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pmc-red/50 focus:border-pmc-red transition-all hover:border-gray-400 text-base md:text-lg font-medium"
                       />
-                      <div className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
+                      <div className={`absolute right-4 top-1/2 -translate-y-1/2 transition-colors ${searchQuery ? 'text-pmc-red' : 'text-gray-400'}`}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} className="text-lg md:text-xl" />
                       </div>
+
+                      {/* Suggestions Dropdown */}
+                      {showSuggestions && suggestions.length > 0 && (
+                        <>
+                          {/* Backdrop */}
+                          <div
+                            className="fixed inset-0 z-30"
+                            onClick={() => setShowSuggestions(false)}
+                          />
+
+                          {/* Suggestions */}
+                          <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl border-2 border-pmc-red/20 shadow-2xl z-40 max-h-80 overflow-hidden">
+                            <div className="px-4 py-3 bg-gradient-to-r from-pmc-red/5 to-pink-50 border-b border-pmc-red/10">
+                              <div className="flex items-center justify-between">
+                                <p className="text-xs font-semibold text-pmc-red uppercase tracking-wide flex items-center gap-2">
+                                  <FontAwesomeIcon icon={faBolt} className="text-pmc-red" />
+                                  {suggestions.length} Domain Suggestions
+                                </p>
+                                <button
+                                  onClick={() => setShowSuggestions(false)}
+                                  className="text-slate-400 hover:text-pmc-red transition-colors"
+                                >
+                                  <FontAwesomeIcon icon={faXmark} />
+                                </button>
+                              </div>
+                            </div>
+                            <div className="overflow-y-auto max-h-64">
+                              {suggestions.map((suggestion, index) => (
+                                <button
+                                  key={index}
+                                  onClick={() => handleSuggestionClick(suggestion)}
+                                  className="w-full px-4 py-3 hover:bg-gradient-to-r hover:from-pmc-red/5 hover:to-pink-50 transition-all border-b border-slate-100 last:border-0 text-left group flex items-center justify-between"
+                                >
+                                  <div className="flex items-center gap-3">
+                                    <div className="w-8 h-8 bg-gradient-to-br from-pmc-red to-pink-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                      <FontAwesomeIcon icon={faMagnifyingGlass} className="text-white text-xs" />
+                                    </div>
+                                    <div>
+                                      <p className="text-sm md:text-base font-semibold text-slate-900 group-hover:text-pmc-red transition-colors">
+                                        {suggestion}
+                                      </p>
+                                      <p className="text-xs text-slate-500">Click to search</p>
+                                    </div>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                                      Available
+                                    </span>
+                                    <FontAwesomeIcon
+                                      icon={faArrowRight}
+                                      className="text-pmc-red opacity-0 group-hover:opacity-100 transition-opacity text-xs"
+                                    />
+                                  </div>
+                                </button>
+                              ))}
+                            </div>
+                            <div className="px-4 py-3 bg-slate-50 border-t border-slate-200 text-center">
+                              <p className="text-xs text-slate-500">
+                                💡 Tip: Try combining words like "tech", "hub", "app", or "pro"
+                              </p>
+                            </div>
+                          </div>
+                        </>
+                      )}
                     </div>
                     <button
                       onClick={handleSearch}
