@@ -125,70 +125,100 @@ LIMIT 25;`);
           showSiteSwitcher={true}
         />
 
-        <main className="flex-1 overflow-y-auto bg-gray-50">
-          <section className="p-8">
-            <TabNavigation />
+        <main className="flex-1 overflow-y-auto bg-gradient-to-br from-slate-50 via-blue-50/20 to-purple-50/20">
+          {/* Hero Section */}
+          <section className="relative px-4 md:px-8 pt-6 pb-4 overflow-hidden">
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <div className="absolute top-10 left-10 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
+              <div className="absolute bottom-10 right-10 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+            </div>
 
-            {/* Database Header */}
-            <section className="mb-6">
-              <div className="flex items-center justify-between">
+            <div className="relative max-w-7xl mx-auto">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Database Manager</h2>
-                  <p className="text-gray-600">View and manage your site's database tables and run safe queries</p>
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-full mb-3">
+                    <FontAwesomeIcon icon={faDatabase} className="text-blue-600" />
+                    <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                      MySQL 8.0
+                    </span>
+                  </div>
+                  <h1 className="text-2xl md:text-4xl font-display font-bold mb-2 bg-gradient-to-r from-slate-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">
+                    Database Manager
+                  </h1>
+                  <p className="text-sm md:text-base text-slate-600">View and manage your site's database tables and run safe queries</p>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <button className="px-4 py-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 text-sm font-medium rounded-lg flex items-center space-x-2">
+                <div className="flex items-center gap-2 md:gap-3">
+                  <button className="px-3 md:px-4 py-2 bg-white border-2 border-slate-300 text-slate-700 rounded-xl text-xs md:text-sm font-semibold hover:border-blue-500 hover:shadow-lg transition-all duration-300 flex items-center gap-2">
                     <FontAwesomeIcon icon={faDownload} />
-                    <span>Export Database</span>
+                    <span className="hidden sm:inline">Export</span>
                   </button>
-                  <button className="px-4 py-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 text-sm font-medium rounded-lg flex items-center space-x-2">
+                  <button className="px-3 md:px-4 py-2 bg-white border-2 border-slate-300 text-slate-700 rounded-xl text-xs md:text-sm font-semibold hover:border-blue-500 hover:shadow-lg transition-all duration-300 flex items-center gap-2">
                     <FontAwesomeIcon icon={faArrowsRotate} />
-                    <span>Refresh</span>
+                    <span className="hidden sm:inline">Refresh</span>
                   </button>
                 </div>
               </div>
-            </section>
+            </div>
+          </section>
 
-            {/* Database Info Cards */}
-            <section className="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="bg-white rounded-lg border border-gray-200 p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-gray-600">Database Size</span>
-                  <FontAwesomeIcon icon={faDatabase} className="text-blue-600" />
+          <section className="px-4 md:px-8">
+            <div className="max-w-7xl mx-auto">
+              {/* Tab Navigation */}
+              <TabNavigation />
+
+              {/* Database Info Cards */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6 mt-6">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/50 p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <FontAwesomeIcon icon={faDatabase} className="text-white text-lg md:text-xl" />
+                    </div>
+                  </div>
+                  <div className="text-2xl md:text-3xl font-bold text-slate-900 mb-1">284.7 MB</div>
+                  <div className="text-xs md:text-sm text-slate-600">Database Size</div>
                 </div>
-                <div className="text-2xl font-bold text-gray-900">284.7 MB</div>
-              </div>
-              <div className="bg-white rounded-lg border border-gray-200 p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-gray-600">Total Tables</span>
-                  <FontAwesomeIcon icon={faTable} className="text-green-600" />
+
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/50 p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <FontAwesomeIcon icon={faTable} className="text-white text-lg md:text-xl" />
+                    </div>
+                  </div>
+                  <div className="text-2xl md:text-3xl font-bold text-slate-900 mb-1">12</div>
+                  <div className="text-xs md:text-sm text-slate-600">Total Tables</div>
                 </div>
-                <div className="text-2xl font-bold text-gray-900">12</div>
-              </div>
-              <div className="bg-white rounded-lg border border-gray-200 p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-gray-600">Total Records</span>
-                  <FontAwesomeIcon icon={faListOl} className="text-purple-600" />
+
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/50 p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <FontAwesomeIcon icon={faListOl} className="text-white text-lg md:text-xl" />
+                    </div>
+                  </div>
+                  <div className="text-2xl md:text-3xl font-bold text-slate-900 mb-1">8,456</div>
+                  <div className="text-xs md:text-sm text-slate-600">Total Records</div>
                 </div>
-                <div className="text-2xl font-bold text-gray-900">8,456</div>
-              </div>
-              <div className="bg-white rounded-lg border border-gray-200 p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-gray-600">Last Backup</span>
-                  <FontAwesomeIcon icon={faClock} className="text-orange-600" />
+
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/50 p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 group">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <FontAwesomeIcon icon={faClock} className="text-white text-lg md:text-xl" />
+                    </div>
+                  </div>
+                  <div className="text-2xl md:text-3xl font-bold text-slate-900 mb-1">2h ago</div>
+                  <div className="text-xs md:text-sm text-slate-600">Last Backup</div>
                 </div>
-                <div className="text-2xl font-bold text-gray-900">2h ago</div>
               </div>
-            </section>
 
             {/* Database Tabs */}
-            <section className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-              <div className="border-b border-gray-200">
-                <nav className="flex space-x-8 px-6">
+            <section className="bg-white/80 backdrop-blur-sm rounded-2xl border border-slate-200/50 shadow-lg overflow-hidden">
+              <div className="border-b border-slate-200">
+                <nav className="flex space-x-4 md:space-x-8 px-4 md:px-6">
                   <button
                     onClick={() => setActiveTab('tables')}
-                    className={`py-4 px-2 border-b-2 font-medium text-sm flex items-center space-x-2 ${
-                      activeTab === 'tables' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-600 hover:text-gray-900'
+                    className={`py-3 md:py-4 px-2 border-b-2 font-semibold text-xs md:text-sm flex items-center space-x-2 transition-all ${
+                      activeTab === 'tables'
+                        ? 'border-blue-600 text-blue-600'
+                        : 'border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300'
                     }`}
                   >
                     <FontAwesomeIcon icon={faTable} />
@@ -196,8 +226,10 @@ LIMIT 25;`);
                   </button>
                   <button
                     onClick={() => setActiveTab('query')}
-                    className={`py-4 px-2 border-b-2 font-medium text-sm flex items-center space-x-2 ${
-                      activeTab === 'query' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-600 hover:text-gray-900'
+                    className={`py-3 md:py-4 px-2 border-b-2 font-semibold text-xs md:text-sm flex items-center space-x-2 transition-all ${
+                      activeTab === 'query'
+                        ? 'border-blue-600 text-blue-600'
+                        : 'border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300'
                     }`}
                   >
                     <FontAwesomeIcon icon={faCode} />
@@ -208,84 +240,88 @@ LIMIT 25;`);
 
               {/* Tables Content */}
               {activeTab === 'tables' && (
-                <div className="p-6">
-                  <div className="mb-4 flex items-center justify-between">
+                <div className="p-4 md:p-6">
+                  <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                     <div className="relative flex-1 max-w-md">
-                      <FontAwesomeIcon icon={faSearch} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                      <input type="text" placeholder="Search tables..." className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                      <FontAwesomeIcon icon={faSearch} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" />
+                      <input
+                        type="text"
+                        placeholder="Search tables..."
+                        className="w-full pl-10 pr-4 py-2 md:py-2.5 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
                     </div>
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm text-gray-600">{databaseTables.length} tables found</span>
+                      <span className="text-xs md:text-sm text-slate-600">{databaseTables.length} tables found</span>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
                     {/* Tables List */}
                     <div className="lg:col-span-1 space-y-2">
                       {databaseTables.map((table) => (
                         <div
                           key={table.name}
-                          className={`rounded-lg p-4 cursor-pointer ${
+                          className={`rounded-xl p-4 cursor-pointer transition-all ${
                             table.selected
-                              ? 'bg-blue-50 border-l-4 border-blue-600'
-                              : 'bg-white border border-gray-200 hover:border-blue-300'
-                          } transition-colors`}
+                              ? 'bg-gradient-to-r from-blue-50 to-purple-50 border-l-4 border-blue-600 shadow-md'
+                              : 'bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md'
+                          }`}
                         >
                           <div className="flex items-center justify-between mb-2">
-                            <h3 className="font-semibold text-gray-900">{table.name}</h3>
-                            <span className={`px-2 py-1 text-xs font-medium rounded ${
-                              table.selected ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-700'
+                            <h3 className="font-semibold text-slate-900 text-sm md:text-base">{table.name}</h3>
+                            <span className={`px-2 py-1 text-xs font-semibold rounded-lg ${
+                              table.selected ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-700'
                             }`}>
-                              {table.rows.toLocaleString()} rows
+                              {table.rows.toLocaleString()}
                             </span>
                           </div>
-                          <p className="text-xs text-gray-600">{table.description}</p>
+                          <p className="text-xs text-slate-600">{table.description}</p>
                         </div>
                       ))}
                     </div>
 
                     {/* Table Details */}
-                    <div className="lg:col-span-2 bg-gray-50 rounded-lg border border-gray-200 p-6">
+                    <div className="lg:col-span-2 bg-gradient-to-br from-slate-50 to-blue-50/30 rounded-xl border border-slate-200 p-4 md:p-6 shadow-md">
                       <div className="mb-4">
-                        <div className="flex items-center justify-between mb-4">
+                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-4">
                           <div>
-                            <h3 className="text-lg font-bold text-gray-900 mb-1">users</h3>
-                            <p className="text-sm text-gray-600">User accounts and profiles</p>
+                            <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-1">users</h3>
+                            <p className="text-xs md:text-sm text-slate-600">User accounts and profiles</p>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <button className="px-3 py-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 text-xs font-medium rounded-lg">
-                              <FontAwesomeIcon icon={faArrowsRotate} className="mr-1" />
-                              Refresh
+                            <button className="px-3 py-2 bg-white border border-slate-300 hover:bg-slate-50 hover:shadow-md text-slate-700 text-xs font-semibold rounded-lg transition-all flex items-center gap-1">
+                              <FontAwesomeIcon icon={faArrowsRotate} />
+                              <span className="hidden sm:inline">Refresh</span>
                             </button>
-                            <button className="px-3 py-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 text-xs font-medium rounded-lg">
-                              <FontAwesomeIcon icon={faDownload} className="mr-1" />
-                              Export
+                            <button className="px-3 py-2 bg-white border border-slate-300 hover:bg-slate-50 hover:shadow-md text-slate-700 text-xs font-semibold rounded-lg transition-all flex items-center gap-1">
+                              <FontAwesomeIcon icon={faDownload} />
+                              <span className="hidden sm:inline">Export</span>
                             </button>
                           </div>
                         </div>
 
                         {/* Table Schema */}
-                        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden mb-4">
-                          <div className="px-4 py-3 bg-gray-50 border-b border-gray-200">
-                            <h4 className="text-sm font-semibold text-gray-900">Table Schema</h4>
+                        <div className="bg-white rounded-xl border border-slate-200 overflow-hidden mb-4 shadow-sm">
+                          <div className="px-4 py-3 bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200">
+                            <h4 className="text-sm font-bold text-slate-900">Table Schema</h4>
                           </div>
                           <div className="overflow-x-auto">
-                            <table className="w-full text-sm">
-                              <thead className="bg-gray-50 border-b border-gray-200">
+                            <table className="w-full text-xs md:text-sm">
+                              <thead className="bg-slate-50 border-b border-slate-200">
                                 <tr>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Column Name</th>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Type</th>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Nullable</th>
-                                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Default</th>
+                                  <th className="px-3 md:px-4 py-3 text-left font-semibold text-slate-700">Column Name</th>
+                                  <th className="px-3 md:px-4 py-3 text-left font-semibold text-slate-700">Type</th>
+                                  <th className="px-3 md:px-4 py-3 text-left font-semibold text-slate-700">Nullable</th>
+                                  <th className="px-3 md:px-4 py-3 text-left font-semibold text-slate-700">Default</th>
                                 </tr>
                               </thead>
-                              <tbody className="divide-y divide-gray-200">
+                              <tbody className="divide-y divide-slate-200">
                                 {tableColumns.map((col) => (
-                                  <tr key={col.name} className="hover:bg-gray-50">
-                                    <td className="px-4 py-3 font-medium text-gray-900">{col.name}</td>
-                                    <td className="px-4 py-3 text-gray-600">{col.type}</td>
-                                    <td className="px-4 py-3 text-gray-600">{col.nullable}</td>
-                                    <td className="px-4 py-3 text-gray-600">{col.default}</td>
+                                  <tr key={col.name} className="hover:bg-slate-50 transition-colors">
+                                    <td className="px-3 md:px-4 py-3 font-semibold text-slate-900">{col.name}</td>
+                                    <td className="px-3 md:px-4 py-3 text-slate-600">{col.type}</td>
+                                    <td className="px-3 md:px-4 py-3 text-slate-600">{col.nullable}</td>
+                                    <td className="px-3 md:px-4 py-3 text-slate-600 text-xs">{col.default}</td>
                                   </tr>
                                 ))}
                               </tbody>
@@ -294,9 +330,9 @@ LIMIT 25;`);
                         </div>
 
                         {/* Table Data */}
-                        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-                          <div className="px-4 py-3 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
-                            <h4 className="text-sm font-semibold text-gray-900">Table Data (Read-Only)</h4>
+                        <div className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+                          <div className="px-4 py-3 bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                            <h4 className="text-sm font-bold text-slate-900">Table Data (Read-Only)</h4>
                             <div className="flex items-center space-x-2">
                               <span className="text-xs text-gray-600">Showing 1-10 of 1,247 rows</span>
                               <div className="flex space-x-1">
