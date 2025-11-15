@@ -36,15 +36,26 @@ interface DropdownState {
 export default function Sidebar() {
   const pathname = usePathname();
   const [dropdowns, setDropdowns] = useState<DropdownState>({
-    domains: true,
-    hosting: true,
-    tools: true,
-    security: true,
-    integrations: true,
+    domains: false,
+    hosting: false,
+    tools: false,
+    security: false,
+    integrations: false,
   });
 
   const toggleDropdown = (key: keyof DropdownState) => {
-    setDropdowns(prev => ({ ...prev, [key]: !prev[key] }));
+    setDropdowns(prev => {
+      // Close all dropdowns first
+      const allClosed = {
+        domains: false,
+        hosting: false,
+        tools: false,
+        security: false,
+        integrations: false,
+      };
+      // Then open only the clicked one (toggle it)
+      return { ...allClosed, [key]: !prev[key] };
+    });
   };
 
   const isActive = (path: string) => pathname === path;
