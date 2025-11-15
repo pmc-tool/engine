@@ -561,7 +561,7 @@ export default function HomePage() {
                         </Link>
                         <Link
                           href={`/sites/${site.id}/ai-assistant`}
-                          className="px-3 py-2.5 bg-slate-700 hover:bg-slate-600 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-all"
+                          className="px-3 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-xs font-semibold rounded-lg flex items-center justify-center gap-1.5 transition-all shadow-sm"
                         >
                           <FontAwesomeIcon icon={faWandMagicSparkles} className="text-sm" />
                           <span className={`${viewMode === 'list' ? 'hidden lg:inline' : ''}`}>AI Re-customize</span>
